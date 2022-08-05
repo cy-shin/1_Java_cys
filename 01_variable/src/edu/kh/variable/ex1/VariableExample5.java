@@ -41,13 +41,14 @@ public class VariableExample5 {
 		// \n : 개행문자 / 줄바꿈을 의미하는 탈출문자
 		
 		
-		
-		System.out.println("줄바뀜?");
-		
+				
 		System.out.println("내가 추가한 내용");
 		
-		System.out.println("학원에서 추가한 내용");
 		
+		// 주석 : 안녕하세요
+		System.out.println("새로 새로 추가한 내용");
+		
+		int day = 5;
 		
 		
 		
