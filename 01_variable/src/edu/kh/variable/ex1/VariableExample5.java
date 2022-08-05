@@ -44,7 +44,7 @@ public class VariableExample5 {
 		
 		System.out.println("줄바뀜?");
 		
-		
+		System.out.println("내가 추가한 내용");
 		
 		
 		
