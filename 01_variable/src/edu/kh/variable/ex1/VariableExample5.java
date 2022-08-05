@@ -46,6 +46,8 @@ public class VariableExample5 {
 		
 		System.out.println("내가 추가한 내용");
 		
+		System.out.println("학원에서 추가한 내용");
+		
 		
 		
 		
