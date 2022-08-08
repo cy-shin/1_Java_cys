@@ -8,7 +8,8 @@ public class BackUpPractice {
 		System.out.println("오늘은 8월 7일 입니다.");
 
 		System.out.println("안녕하세요");
-		System.out.println("오늘은 8월 8일 입니다.");
+		System.out.println("오늘은 22년 8월 8일 입니다.");
+		
 	}
 
 }
