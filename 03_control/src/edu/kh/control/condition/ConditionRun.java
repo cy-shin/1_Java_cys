@@ -14,7 +14,7 @@ public class ConditionRun {
 //		ex.ex2();
 //		ex.ex3();
 //		ex.ex4();
-//		ex.ex5();
+		ex.ex5();
 		
 		SwitchExample switchEx = new SwitchExample();
 		
@@ -22,7 +22,7 @@ public class ConditionRun {
 //		switchEx.ex2();
 //		switchEx.ex3();
 //		switchEx.ex4();
-		switchEx.ex5();
+//		switchEx.ex5();
 		
 		
 		

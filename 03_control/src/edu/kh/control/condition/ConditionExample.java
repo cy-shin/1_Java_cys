@@ -141,56 +141,55 @@ public class ConditionExample {
 		
 		String result;
 		
-		
 		Scanner sc = new Scanner(System.in);
 		
-// else - if문으로 확인하기
-		
-		System.out.print("나이를 입력해주세요 : ");
-		int age = sc.nextInt();
-		
-		
-		System.out.print("키를 입력해주세요 : ");
-		double height = sc.nextDouble();
-		
-		
-		
-		if(age < 0 || age > 100) { // 0세 미만 100세 초과 걸러내기
-			result = "잘못 입력 하셨습니다.";
-		} else if(age < 12 ) { // 12세 미만
-			result = "적정 연령이 아닙니다.";
-		} else if(height < 140.0) { // 140.0cm 미만
-			result = "적정 키가 아닙니다.";
-		} else { // 조건 전부 미충족 == 12세 이상 && 140cm 이상
-			result = "탑승 가능";
-		}
-		
-
-////		나이 먼저 검사해서 나이가 안맞으면 먼저 걸러내고, 나이가 맞을때만 키를 검사하는 방식으로 만들어보기
-//		
+//// else - if문으로 확인하기
 //		
 //		System.out.print("나이를 입력해주세요 : ");
-//		
 //		int age = sc.nextInt();
 //		
 //		
-//		if(age > 0 && age < 100) {
-//			if(age >=12) {
-//				System.out.print("키를 입력해주세요 : ");
-//				double height = sc.nextDouble();
-//				
-//				if(height >= 140.0) {
-//					result = "탑승 가능";
-//				} else {
-//					result = "적정 키가 아닙니다.";
-//				}
-//			} else {
-//				result = "적정 연령이 아닙니다.";
-//			}
-//		} else {
-//			result = "잘못 입력하셨습니다.";
+//		System.out.print("키를 입력해주세요 : ");
+//		double height = sc.nextDouble();
+//		
+//		
+//		
+//		if(age < 0 || age > 100) { // 0세 미만 100세 초과 걸러내기
+//			result = "잘못 입력 하셨습니다.";
+//		} else if(age < 12 ) { // 12세 미만
+//			result = "적정 연령이 아닙니다.";
+//		} else if(height < 140.0) { // 140.0cm 미만
+//			result = "적정 키가 아닙니다.";
+//		} else { // 조건 전부 미충족 == 12세 이상 && 140cm 이상
+//			result = "탑승 가능";
 //		}
 //		
+
+//		나이 먼저 검사해서 나이가 안맞으면 먼저 걸러내고, 나이가 맞을때만 키를 검사하는 방식으로 만들어보기
+		
+		
+		System.out.print("나이를 입력해주세요 : ");
+		
+		int age = sc.nextInt();
+		
+		
+		if(100 > age && age > 0) {
+			if(age >=12) {
+				System.out.print("키를 입력해주세요 : ");
+				double height = sc.nextDouble();
+				
+				if(height >= 140.0) {
+					result = "탑승 가능";
+				} else {
+					result = "적정 키가 아닙니다.";
+				}
+			} else {
+				result = "적정 연령이 아닙니다.";
+			}
+		} else {
+			result = "잘못 입력하셨습니다.";
+		}
+		
 
 		System.out.println(result);
 	}

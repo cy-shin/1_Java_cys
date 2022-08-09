@@ -31,7 +31,7 @@ public class SwitchExample {
 	 *     .
 	 *      
 	 * default:
-	 * 		모든 케이스를 만족하기 않는 경우에 수행할 코드; 
+	 * 		모든 케이스를 만족하지 않는 경우에 수행할 코드; 
 	 * 
 	 * */
 	

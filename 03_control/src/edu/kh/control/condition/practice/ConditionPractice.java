@@ -52,14 +52,35 @@ public class ConditionPractice {
 	}
 	
 	public void practice3() {
+		// ++윤년을 추가해보기
+		
 		Scanner sc = new Scanner(System.in);
-		System.out.print("1~12 사이의 정수 입력 : ");
+		
+		
+		System.out.print("연도를 입력하세요 : ");
+		int year = sc.nextInt();
+		
+		System.out.print("월을 입력하세요 : ");
 		int month = sc.nextInt();
+
 		int day;
+		
+		int flag = 0; // 윤년을 확인하는 용도. 윤년이면 -1, 평년이면 0
+		if( year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
+			flag = -1;
+			System.out.println(year + "년은 윤년입니다.");
+		}
+		
+		// 4로 나누어 떨어지면서, 100으로 나누어 떨어지지 않거나 400으로 나눠지는 경우
 		
 		switch(month) {
 		case 2:
-			day = 28; break;
+			if(flag == -1) {
+				day = 29;
+			} else {
+				day = 28;
+			}
+			break;
 		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
 			day = 30; break;
 		case 4: case 6: case 9: case 11 :
@@ -71,7 +92,7 @@ public class ConditionPractice {
 		if(day==0) {
 			System.out.printf("%d월은 잘못 입력된 달입니다.", month);
 		} else {
-			System.out.printf("%d월은 %d일까지 있습니다.", month, day);
+			System.out.printf("%d년의 %d월은 %d일까지 있습니다.", year, month, day);
 		}
 	}
 	
@@ -103,7 +124,11 @@ public class ConditionPractice {
 	}
 	
 	public void practice5() {
+		// ++ 점수 비율을 직접 입력할 수 있게 만들어보기
+		
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("================= 점수 입력 =================");
 		
 		System.out.print("중간 고사 점수 : ");
 		double mid = sc.nextInt();
@@ -118,8 +143,9 @@ public class ConditionPractice {
 		double attendance = sc.nextInt();
 		
 		// 입력받은 성적을 비율에 맞게 변경시켜줌
-		// 점수 비율을 따로 입력할 수 있게도 만들어보기
 		
+		System.out.println("================= 비율 입력 =================");
+		System.out.println();
 		System.out.print("중간 고사 비율 : ");
 		double midRate = sc.nextDouble();
 
@@ -129,34 +155,38 @@ public class ConditionPractice {
 		System.out.print("과제 비율 : ");
 		double assignmentRate = sc.nextDouble();
 		
-		if(midRate + finRate + assignmentRate != 0.8) {
+		
+		if(midRate + finRate + assignmentRate == 0.8) {
+			
+			mid *= midRate;
+			fin *= finRate;
+			assignment *= assignmentRate;
+			
+			double score = mid + fin + assignment + attendance;
+			
+			System.out.println("================= 결과 =================");
+			
+			if(attendance <= 14) {
+				System.out.printf("Fail [출석 횟수 부족 (%.0f/20)]", attendance);
+			} else {
+				System.out.printf("중간 고사 점수(20) : %.1f\n"
+						+ "기말 고사 점수(30) : %.1f\n"
+						+ "과제 점수		(30) : %.1f\n"
+						+ "출석 점수		(20) : %.1f\n"
+						+ "총점 : %.1f\n"
+						, mid, fin, assignment, attendance, score);
+				
+				if(score < 70) {
+					System.out.println("Fail [점수 미달]");
+				} else {
+					System.out.println("PASS");
+				}
+			}
+		} else {
 			System.out.println("비율이 적절하지 않습니다.");
 		}
 
-		mid *= midRate;
-		fin *= finRate;
-		assignment *= assignmentRate;
 		
-		double score = mid + fin + assignment + attendance;
-		
-		System.out.println("================= 결과 =================");
-		
-		if(attendance <= 14) {
-			System.out.printf("Fail [출석 횟수 부족 (%.0f/20)]", attendance);
-		} else {
-			System.out.printf("중간 고사 점수(20) : %.1f\n"
-					+ "기말 고사 점수(30) : %.1f\n"
-					+ "과제 점수		(30) : %.1f\n"
-					+ "출석 점수		(20) : %.1f\n"
-					+ "총점 : %.1f\n"
-					, mid, fin, assignment, attendance, score);
-			
-			if(score < 70) {
-				System.out.println("Fail [점수 미달]");
-			} else {
-				System.out.println("PASS");
-			}
-		}
 	
 
 	}
