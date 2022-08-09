@@ -60,9 +60,9 @@ public class ConditionPractice {
 		switch(month) {
 		case 2:
 			day = 28; break;
-		case 1: case 3: case 5: case 7: case 9: case 11:
+		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
 			day = 30; break;
-		case 4: case 6: case 8: case 10 : case 12:
+		case 4: case 6: case 9: case 11 :
 			day = 31; break;
 		default :
 			day = 0;
@@ -87,13 +87,13 @@ public class ConditionPractice {
 		
 		String result;
 		
-		if(bmi<18.5) {
+		if(bmi < 18.5) {
 			result = "저체중";
-		} else if(bmi<23) {
+		} else if(bmi < 23) {
 			result = "정상체중";
-		} else if(bmi<25) {
+		} else if(bmi < 25) {
 			result = "과체중";
-		} else if(bmi<30) {
+		} else if(bmi < 30) {
 			result = "비만";
 		} else {
 			result = "고도비만";
@@ -106,51 +106,58 @@ public class ConditionPractice {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("중간 고사 점수 : ");
-		int midRaw = sc.nextInt(); // 중간고사 원점수
-		double mid = midRaw * 0.2; // 중간고사 원점수 * 가중치
+		double mid = sc.nextInt();
 
 		System.out.print("기말 고사 점수 : ");
-		int finRaw = sc.nextInt(); // 기말고사 원점수
-		double fin = finRaw * 0.3; // 기말고사 원점수 * 가중치
+		double fin = sc.nextInt();
 		
 		System.out.print("과제 점수 : ");
-		int assignmentRaw = sc.nextInt(); // 과제 원점수
-		double assignment = assignmentRaw * 0.3; // 과제 원점수 * 가중치
+		double assignment = sc.nextInt();
 		
 		System.out.print("출석 횟수 : ");
-		int attendanceRaw = sc.nextInt(); // 출석 횟수
-		double attendance = attendanceRaw * 1.0; // 출석 횟수 * 가중치
+		double attendance = sc.nextInt();
 		
-		double score = (mid) + (fin) + (assignment) + (attendance);
+		// 입력받은 성적을 비율에 맞게 변경시켜줌
+		// 점수 비율을 따로 입력할 수 있게도 만들어보기
 		
-		int check = 0; // 출석 횟수가 미달인지 아닌지 확인 (-1이면 미달)
+		System.out.print("중간 고사 비율 : ");
+		double midRate = sc.nextDouble();
+
+		System.out.print("기말 고사 비율 : ");
+		double finRate = sc.nextDouble();
 		
-		String result;
+		System.out.print("과제 비율 : ");
+		double assignmentRate = sc.nextDouble();
 		
-		if(attendance <= 14) {
-			check = -1; // 출석 횟수 미달인 경우 check를 -1로 바꿈
-			result = "Fail";
-		} else if(score < 70) {
-			result = "Fail [점수 미달]";
-		} else {
-			result = "PASS";
+		if(midRate + finRate + assignmentRate != 0.8) {
+			System.out.println("비율이 적절하지 않습니다.");
 		}
+
+		mid *= midRate;
+		fin *= finRate;
+		assignment *= assignmentRate;
+		
+		double score = mid + fin + assignment + attendance;
 		
 		System.out.println("================= 결과 =================");
 		
-		if(check == -1) {
-			System.out.printf("%s [출석 횟수 부족 (%d/20)]", result, attendanceRaw);
-		}
-
-		if(check == 0) {
-			
+		if(attendance <= 14) {
+			System.out.printf("Fail [출석 횟수 부족 (%.0f/20)]", attendance);
+		} else {
 			System.out.printf("중간 고사 점수(20) : %.1f\n"
-							+ "기말 고사 점수(30) : %.1f\n"
-							+ "과제 점수		(30) : %.1f\n"
-							+ "출석 점수		(20) : %.1f\n"
-							+ "총점 : %.1f\n"
-							+ "%s"
-							, mid, fin, assignment, attendance, score, result);
+					+ "기말 고사 점수(30) : %.1f\n"
+					+ "과제 점수		(30) : %.1f\n"
+					+ "출석 점수		(20) : %.1f\n"
+					+ "총점 : %.1f\n"
+					, mid, fin, assignment, attendance, score);
+			
+			if(score < 70) {
+				System.out.println("Fail [점수 미달]");
+			} else {
+				System.out.println("PASS");
+			}
 		}
+	
+
 	}
 }
