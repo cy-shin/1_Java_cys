@@ -15,6 +15,54 @@ public class ForExample {
 	 * }
 	 * 
 	 * */
+	
+	public void ex99() { // 3 6 9 만들어보기
+		for(int i = 1; i <= 100; i++) {
+			
+			// 3 6 9 13 16 19 23 26 29 33 36 39 ..
+			
+			// 끝자리가 3, 6, 9로 끝나는 경우 = 10으로 나눠서 나머지가 3, 6, 9 ?
+			
+			int flag = 0; // 매번 초기화
+			
+			if(i % 10 == 3 || i % 10 == 6 || i % 10 == 9) {
+				System.out.print("짝");
+				flag = 1; // 숫자에 3, 6, 9가 들어가면 flag = 1;
+			}
+			
+			// 또는 앞자리가 3, 6, 9로 끝나는 경우 = 10으로 나눠서 몫이 3, 6, 9 ?
+			if(i / 10 == 3 || i / 10 == 6 || i / 10 == 9) {
+				System.out.print("짝");
+				flag = 1;
+			}
+			
+			if(flag == 0) {
+				System.out.print(i);
+			}
+			System.out.println(); // 출력이 다 끝날때마다 줄을 바꿈
+		}
+		
+		
+		
+	}
+	
+	public void ex98() { // 오른쪽으로 정렬시켜보기
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("정수 입력 : ");
+		int input = sc.nextInt();
+		
+		for(int i = input; i >= 1; i--) {
+			for(int j = 1; j < i; j++) {
+				System.out.print(" ");
+			}
+			for(int x = input; x >= i; x--) {
+				System.out.print(x);
+			}
+			System.out.println();
+		}
+	}
+	
 	public void ex1() {
 		// for문 기초 사용법 1
 		// 1~10 까지 반복 출력
@@ -219,10 +267,9 @@ public class ForExample {
 
 	}
 
-	// ====================================
-	// ============ 중첩 반복문 ==============
-	// ====================================
-	
+	// ================================================
+	// ================== 중첩 반복문 ====================
+	// ================================================
 	
 	public void ex11() {
 		
@@ -253,6 +300,134 @@ public class ForExample {
 			System.out.println(); // 줄 바꿈
 		}
 	}
+	
+	public void ex13() {
+		
+		// 2중 for문을 이용해서 다음 모양을 출력하세요.
+		
+		// 1
+		// 12
+		// 123
+		// 1234
+		
+		for(int x = 1; x <= 4; x++) {
+			for(int i = 1; i <= x; i++) {
+				System.out.print(i);
+			}
+			System.out.println();
+		}
+	}
+	
+	public void ex14() {
+		
+		// 방법2
+		for(int x = 1; x <= 4; x++) {
+			for(int i = 4; i > 4-x ; i--) {
+				System.out.print(i);
+			}
+			System.out.println();
+		}
+		
+		// 방법1 (더 좋은 방법)
+		for(int x = 4; x >= 1; x--) {
+			for(int i = 4; i >= x; i--) {
+				System.out.print(i);
+			}
+			System.out.println();
+		}
+		
+	}
+
+	public void ex15() {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("정수 입력 : ");
+		int input = sc.nextInt();
+		
+		for(int x = 1; x <= input; x++) {
+			for(int i = input; i >= x; i--) {
+				System.out.print(i);
+			}
+			System.out.println();
+		}
+		
+		
+		for(int x = input; x >= 1; x--) {
+			for(int i = x; i >= 1; i--) {
+				System.out.print(i);
+			}
+			System.out.println();
+		}
+		
+	}
+	
+	public void ex16() {
+		
+		// 2중 for문을 이용하여 다음 모양을 출력하세요
+		
+		for(int row = 1; row <= 5; row++) {
+			for(int col = 1; col <= row; col++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+	}
+	
+	public void ex17() {
+		
+		// 합계 sum
+		// 개수 count .. 수를 셀 대는 0부터 1씩 증가시키면서 세는 것이 보통
+		
+		// 1부터 20 사이의 3의 배수의 개수를 출력하세요............
+		
+		int sum = 0;
+		int count = 0;
+		
+		for(int i = 1; i <= 20; i++) {
+			if(i % 3 ==0) {
+				count++;
+				sum += i;
+			}
+		}
+
+		System.out.println("\nsum: " + sum);
+		System.out.println("count: " + count);
+	}
+	
+	
+	public void ex18() {
+		
+		// 2중 for문과 count를 이용해서 아래 모양 출력하기
+		
+		int count = 1;
+		
+		for(int i = 1; i <= 3; i++) {
+			for(int j = 1; j <= 4; j++) {
+				System.out.printf("%3d",count++);
+				// 후위 증감 연산이기 때문에 먼저 값을 출력 후 count 값이 1 증가함
+			
+			}
+			System.out.println();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
