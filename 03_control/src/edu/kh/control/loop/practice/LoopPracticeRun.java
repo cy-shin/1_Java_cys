@@ -1,11 +1,12 @@
 package edu.kh.control.loop.practice;
 
+
 public class LoopPracticeRun {
 	public static void main(String[] args) {
 		
 		LoopPractice lp = new LoopPractice();
 		
-		lp.practice99();
+//		lp.practice99();
 //		lp.practice1();
 //		lp.practice2();
 //		lp.practice3();
@@ -19,5 +20,7 @@ public class LoopPracticeRun {
 //		lp.practice11();
 //		lp.practice12();
 //		lp.practice13();
+		
+		
 	}
 }
