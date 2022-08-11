@@ -27,51 +27,43 @@ public class LoopPractice {
 //		}
 		
 		/* 
-		 * 
-		 * *       *
-		 * **     **
-		 * ***   ***
-		 * **** ****
-		 * *********
-		 * 
-		 * *      *
-		 * **    **
-		 * ***  ***
-		 * ********
-		 * 
-		 * *    *
-		 * **  **
-		 * ******
-		 * 
-		 * * *
-		 * ***
-		 * 
+		 * *2345678*   5 -> 9      
+		 * **34567**   
+		 * ***456***   
+		 * ****5****                
+		 * *********              
 		 * 
 		 */
 		
+		/*
+		 * 	input	input*2	i	j	input*2-i	r
+		 *  5		10		3	1				*
+		 * 						2				*
+		 * 						3				*
+		 * 						4	7			" "			
+		 * 						5				" "
+		 * 						6				" "
+		 * 						7				*
+		 * 						8				*
+		 * 						9				*
+		 * 						
+		 */
 		
-		for(int i =1; i <= 4; i++) {
-			for(int star1 = 1; star1 <=i; star1++) {
-				System.out.print("*");
-			}
-			for(int blank = 4 + 2; blank >=i; blank--) {
-				System.out.print(" ");
-			}
-			for(int star2 = 1; star2 <=i; star2++) {
-				System.out.print("*");
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("정수를 입력해주세요 : ");
+		int input = sc.nextInt();
+		
+		for(int i = 1; i <= input; i++) {
+			for(int j = 1; j <= input * 2 - 1; j++) {
+				if(j <= i || j >= input * 2 - i) {
+					System.out.print("*");
+				} else {
+					System.out.print(" ");
+				}
 			}
 			System.out.println();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 	}
@@ -133,6 +125,7 @@ public class LoopPractice {
 		int num2 = sc.nextInt();
 		
 		if(num1 > num2) {
+			// 두 변수의 값 교환
 			int tmp = num2;
 			num2 = num1;
 			num1 = tmp;
@@ -170,8 +163,9 @@ public class LoopPractice {
 			for(int i = dan; i <= 9; i++) {
 				System.out.printf("===== %d단 =====\n", i);
 				for(int j = 1; j <= 9; j++) {
-					System.out.printf("%d * %d = %d \n", i, j, i*j);
+					System.out.printf("%d * %d = %2d \n", i, j, i*j);
 				}
+				System.out.println();
 			}
 		}
 	}
@@ -207,12 +201,29 @@ public class LoopPractice {
 		System.out.print("정수 입력 : ");
 		int input = sc.nextInt();
 		
+		// for문을 이용한 방법
 		for(int i = input; i >= 1; i--) {
+			
 			for(int blank = 1; blank < i; blank++) { // 띄어쓰기를 할 반복문
 				System.out.print(" ");
 			}
 			for(int star = input; star >= i; star--) { // 별을 찍을 반복문
 				System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+		System.out.println();
+		System.out.println();
+		
+		// *** if문을 이용한 방법
+		for(int row = 1; row <= input; row++) {
+			for(int col = 1; col <= input ; col++) {
+				if(col <= input - row) {
+					System.out.print(" ");
+				} else {
+					System.out.print("*");
+				}
 			}
 			System.out.println();
 		}
@@ -244,6 +255,16 @@ public class LoopPractice {
 			}
 			System.out.println();
 		}
+		
+		// 위아래 안나누고 조건식으로 풀어보기
+		
+//		for(int i = 1; i < input * 2; i++) {
+//			for(int j = 1; j <= i % (input+1); j++) {
+//				System.out.print("*");
+//			}
+//			System.out.println();
+//		}
+			
 	}
 	
 	public void practice11() {
@@ -257,11 +278,11 @@ public class LoopPractice {
 		
 		/*
 		 * 	i	star
-		 *  1    1
-		 *  2    3
-		 *  3    5
-		 *  4    7
-		 *  5    9
+		 *  1    1          *
+		 *  2    3         ***
+		 *  3    5        *****
+		 *  4    7       ******* 
+		 *  5    9		 1234567
 		 * 
 		 */
 		
@@ -278,6 +299,20 @@ public class LoopPractice {
 			}
 			System.out.println();
 		}
+		
+		// if문으로도 풀어보기(for문 1개쓰기)
+		
+		for(int i = 1; i <= input; i++) {
+			for(int j = 1; j < input*2; j++) {
+				if(j <= input - i || j >= input + i) {
+					System.out.print(" ");
+				} else {
+					System.out.print("*");
+				}
+			}
+			System.out.println();
+		}
+		
 	}
 	
 	public void practice12() {
@@ -293,53 +328,40 @@ public class LoopPractice {
 		 * *     * 5 / 5
 		 * *     * 6 / 5
 		 * ******* 7
-		 * 
-		 * 정수 : 5
-		 * 
-		 * ***** 1
-		 * *   * 2 / 3
-		 * *   * 3 / 3
-		 * *   * 4 / 3
-		 * ***** 5
-		 * 
-		 * 정수 : 4
-		 * 
-		 * **** 1
-		 * *  * 2 / 2
-		 * *  * 3 / 2
-		 * **** 4 / 2
-		 * 
-		 * 정수 : 3
-		 * 
-		 * ***
-		 * * *
-		 * ***
-		 * 
-		 * 정수 : 2
-		 * 
-		 * **
-		 * **
-		 */
+		 */ 
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.print("정수 입력 : ");
 		int input = sc.nextInt();
 		
+//		for(int i = 1; i <= input; i++) {
+//			if(i == 1 || i == input) {
+//				for(int row = 1; row <= input; row++) { // 뚜껑과 바닥
+//					System.out.print("*");
+//				}
+//			} else { // 뚜껑과 바닥이 아니라 몸체 부분에서는?
+//				for(int col = 1; col <= input; col++)
+//					if(col == 1 || col == input) { // 첫번째 자리랑 마지막 자리에만 *
+//						System.out.print("*");
+//					} else {
+//						System.out.print(" "); // 나머지 자리에는 공백
+//					}
+//				}
+//			System.out.println();
+//			}
+		
+		System.out.println();
+		
 		for(int i = 1; i <= input; i++) {
-			if(i == 1 || i == input) {
-				for(int row = 1; row <= input; row++) { // 뚜껑과 바닥
+			for(int j = 1; j <= input; j++) {
+				if((i == 1 || i == input) || (j == 1 || j == input)) {
 					System.out.print("*");
+				} else {
+					System.out.print(" ");
 				}
-			} else { // 뚜껑과 바닥이 아니라 몸체 부분에서는?
-				for(int col = 1; col <= input; col++)
-					if(col == 1 || col == input) { // 첫번째 자리랑 마지막 자리에만 *
-						System.out.print("*");
-					} else {
-						System.out.print(" "); // 나머지 자리에는 공백
-					}
-				}
+			}
 			System.out.println();
-			}	
+		}
 	}	
 	
 	public void practice13() {
@@ -352,10 +374,14 @@ public class LoopPractice {
 		for(int i = 1; i <= num; i++) {
 			if(i % 2 == 0 || i % 3 == 0) {
 				System.out.print(i + " ");
-			}
-			if(i % 2 == 0 && i % 3 == 0) {
+				if(i % 2 == 0 && i % 3 == 0) {
 				count++;
 			}
+
+			}
+//			if(i % 2 == 0 && i % 3 == 0) {
+//				count++;
+//			}
 		}
 		System.out.printf("\ncount : %d", count);
 	}

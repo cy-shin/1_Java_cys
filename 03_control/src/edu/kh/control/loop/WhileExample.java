@@ -124,7 +124,7 @@ public class WhileExample {
 			
 //			if(flag && (4 >= input && input >= 1)) { // true인 경우
 //				menu += ", ";
-//			} else { // false인 경우
+//			} else if(!false && (input >= 1 && input <=4)) { // false인 경우
 //				flag = true;
 //			}
 			
@@ -162,7 +162,7 @@ public class WhileExample {
 			default: System.out.println("잘못 입력하셨습니다.\n");
 			} // end switch
 			
-			if(!flag) { // !flag == if flag is false..
+			if(!flag && input >= 1 && input <=4) { // !flag == if flag is false..
 				flag = true;
 			}
 			
@@ -188,7 +188,9 @@ public class WhileExample {
 		    while(조건식) : 조건식이 true이면 { } 내부 코드를 반복 수행
 		 >>> 일단 {} 내부 코드를 수행하고, 조건식이 true인 동안 반복 수행
 		 >>> 최소 1회 실행을 보장함.. "최소 1회" 이상 반복하는 while문
-		 */
+		 
+		 
+		*/
 		
 	
 		Scanner sc = new Scanner(System.in);
