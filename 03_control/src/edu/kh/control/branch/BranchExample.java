@@ -162,11 +162,88 @@ public class BranchExample {
 		
 	}
 	
+	public void rpsGame() {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		// game : 게임 횟수
+		
+		// me : 내가 낸 값
+		// ran : 컴퓨터의 값 설정을 위한 난수
+		// com : 컴퓨터의 값
+		
+		// win : 승
+		// lose : 패
+		// draw : 무
+		
+		System.out.print("몇판? : ");
+		int game = sc.nextInt();
+		
+		int win = 0;
+		int lose = 0;
+		int draw = 0;
+		
+		System.out.println("============ 게임 시작 ============");
+		for(int i=1; i<=game; i++) {
+			System.out.println(i + "번째 게임");
+			
+			System.out.print("가위/바위/보 중 하나를 입력해주세요 : ");
+			String me = sc.next();
+			
+			if(!(me.equals("가위") || me.equals("바위") || me.equals("보"))) {
+				System.out.println("\n다시 입력해주세요.\n");
+				i--;
+				continue;
+			}
+			
+			int ran = (int)(Math.random()*3);
+			
+			String com = "";
+			
+			
+			if(ran == 0) {
+				com = "가위";
+			} else if(ran == 1) {
+				com = "바위";
+			} else {
+				com = "가위";
+			}
+			
+			System.out.printf("\n컴퓨터는 [%s]를 선택했습니다.\n", com);
+			
+			
+			if(com.equals(me)) {
+				System.out.println("비겼습니다.");
+				draw++;
+			} else if(com.equals("가위")) {
+				if(me.equals("바위")) {
+					System.out.println("플레이어 승!");
+					win++;
+				} else {
+					System.out.println("졌습니다 ㅠㅠ");
+					lose++;
+				}
+			} else if(com.equals("바위")) {
+				if(me.equals("보")) {
+					System.out.println("플레이어 승!");
+					win++;
+				} else{
+					System.out.println("졌습니다 ㅠㅠ");
+					lose++;
+				}
+			} else if(com.equals("보")) {
+				if(me.equals("가위")) {
+					System.out.println("플레이어 승!");
+					win++;
+				} else{
+					System.out.println("졌습니다 ㅠㅠ");
+					lose++;
+				}
+			}
+			System.out.printf("\n현재 기록 : %d승 %d무 %d패\n\n", win, draw, lose);
+				
+		}
 	
-	
-	
-	
-	
-	
-	
+	}
+
 }
