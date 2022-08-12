@@ -3,6 +3,8 @@ package edu.kh.array.ex;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import javax.swing.DebugGraphics;
+
 public class ArrayExample {
 	
 	/* ============= 배열 (자료구조) ================
@@ -11,6 +13,52 @@ public class ArrayExample {
 	 * 	 각 변수들은 index를 이용하여 구분함.
 	 * 
 	 * */
+	
+	public void ex0() {
+		Scanner sc = new Scanner(System.in);
+		
+		// 배열 값 무작위로 섞어보기
+		
+		String[] arr = {"*", " ", " ", " ", " ", " ", " ", " ", " ", " "};
+		String[] arr2 = new String[arr.length];
+		
+		System.out.println(Arrays.toString(arr));
+		
+		for(int i=0; i<arr.length; i++) {
+			int ran = (int)(Math.random()*arr.length);
+			String tmp = arr[i];
+			arr[i] = arr[ran];
+			arr[ran] = tmp;
+		}
+		
+		System.out.println("*을 섞었습니다.");
+		
+//		System.out.println(Arrays.toString(arr));
+
+		// 배열 arr2를 공백으로 정리
+		for(int i=0; i<arr.length; i++) {
+			arr2[i] = " ";
+		}
+		
+		// 배열에서 문자열 '*' 찾아보기
+		System.out.println("*의 위치를 있을까요?");
+		
+		for(int i=0; i<arr.length; i++) {
+			System.out.println("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]");
+			System.out.println(Arrays.toString(arr2));
+
+			System.out.print("몇 번째 자리? : ");
+			int input = sc.nextInt();
+			if(arr[input-1].equals("*")) {
+				System.out.println("정답");
+				break;
+			} else {
+				arr2[input-1] = arr[input];
+				System.out.println("다시 시도해보세요");
+			}
+		}
+		
+	}
 	
 	public void ex1() {
 		
@@ -202,46 +250,216 @@ public class ArrayExample {
 			sum += scoreArr[i];
 		}
 		
+		// 최고점수 최저점수 
+		int max = scoreArr[0];
+		int min = scoreArr[0];
+		// 배열의 첫 번째 인덱스 값을 최고/최저 비교 기준으로 삼음
+		
 		System.out.println();	// 줄 바꿈
 
 		System.out.println("합계 : " + sum);
 		System.out.println("평균 : " + (double)sum/scoreArr.length);
-		int max = scoreArr[0];
-		int min = scoreArr[0];
 		
-		for(int i=1; i<scoreArr.length; i++) {
-			if(min > scoreArr[i]) {
-				int tmp = min;
-				min = scoreArr[i];
-				scoreArr[i] = tmp;
-			} else if(max < scoreArr[i]) {
-				int tmp = max;
+		// breakpoint를 지정한 라인 이전에 멈춘다!
+		
+		// for문을 breakpoint로 지정하면, 증감식이 해석되기 전에 멈춘다! (debug mode)
+		
+		// else - if가 속도는 더 빠르나, 유지보수 측면에서는 불리함
+		for(int i=1; i < scoreArr.length; i++) {
+			
+			if(max < scoreArr[i]) {
 				max = scoreArr[i];
-				scoreArr[i] = tmp;
+			}
+			
+			if(min > scoreArr[i]) {
+				min = scoreArr[i];
 			}
 		}
 		
 		System.out.printf("최고점 : %d \n최저점 : %d", max, min);
 	}
 	
+	public void ex8() {
+		
+		// 배열 내 데이터 검색!
+		
+		// 입력 받은 정수가 배열에 존재하면 몇 번 인덱스에 존재하는지 출력하세요.
+		// 단, 없다면 "존재하지 않습니다"를 출력하세요.
+		
+		
+		int[] arr = { 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000};
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("정수 입력 : ");
+		int search = sc.nextInt();
+		
+		boolean flag = true;
+		// for문이 종료된 후에도 flag가 true이면 찾는 값이 존재하지 않는다!
+		// false면 찾는 값이 존재한다!!
+		
+		// arr 배열에 대한 순차/반복 접근 : 배열의 모든 값에 1번씩 접근
+		for(int i=0; i<arr.length; i++) {
+			if(search == arr[i]) { 
+				System.out.println(i + "번 째 인덱스에 존재합니다.");
+				flag = false; // 값을 찾았으므로, flag를 false로 바꿨음
+				break; // arr배열에는 중복 데이터가 없으므로, break문으로 탈출
+			}
+		}
+		
+		if(flag) {
+			System.out.println("존재하지 않습니다.");
+		}
+		
+		
+	}
 	
+	public void createLottoNumber() {
+		// 배열을 이용한 중복 데이터 제거 + 정렬
+		
+		// 1. 1 ~ 45 사이의 중복되지 않은 난수 6개
+		
+		// 2. 생성된 난수를 오름차순으로 예쁘게 정렬
+		
+		System.out.println("***** 로또 번호 생성기 *****");
+		
+		// 난수 6개를 저장할 배열 lotto를 선언 및 공간을 할당
+		int[] lotto = new int[6];
+		
+		// 난수를 생성하여 lotto 배열에 추가!
+		for(int i=0; i<lotto.length; i++) {
+			int ran = (int)(Math.random()*45+1);
+			lotto[i] = ran; // 난수를 배열 요소에 대입
+			for(int x=0; x<i; x++) {
+				if(ran==lotto[x]) {
+					i--; 
+					// i 값을 인위적으로 감소시켜서
+					// 바깥쪽 for문의 증감식(i++)이 실행되었을 때 i값이 현재 값을 유지하도록 만듦
+					break; // 추가 검사가 불필요하기 때문에 break문으로 탈출~
+				}
+			}
+		}
+		
+		// lotto 배열에 저장된 모든 값 출력
+		System.out.println(Arrays.toString(lotto));
+		
+		// Arrays.sort(배열명) : 배열 내 값을 오름차순으로 정렬해줌
+		Arrays.sort(lotto);
+		System.out.println(Arrays.toString(lotto));
+		
+	}
 	
+	public void ex9() {
+		// 얕은 복사
+		// - 참조하는 주소만을 복사하여
+		// 서로 다른 참조 변수가 하나의 배열(또는 객체)를 참조하게 하는 복사
+		
+		// 특징 : 하나의 배열을 참조하기 때문에 값을 공유하게 된다.
+		
+		int[] arr = {99, 70, 80, 50, 40};
+		
+		// arr 변수에 저장된 배열의 시작 주소를 copyArr에 대입(얕은 복사)
+		int[] copyArr = arr;
+
+		// 주소 확인 -> 같음
+		System.out.println("arr : " + arr);
+		System.out.println("copyArr : " + copyArr);
+		
+		// 값 변경
+		System.out.println("[변경 전]");
+		System.out.println("arr : " + Arrays.toString(arr));
+		System.out.println("copyArr : " + Arrays.toString(copyArr));
+		
+		// 복사본의 값을 변경했는데 원본도 같이 변함 -> 값을 공유!
+		// (동일한 배열을 참조하고 있다!)
+		copyArr[2] = 10000;
+		
+		System.out.println("[변경 후]");
+		System.out.println("arr : " + Arrays.toString(arr));
+		System.out.println("copyArr : " + Arrays.toString(copyArr));
+		
+	}
 	
+	public void ex10() {
+		// 깊은 복사
+		// - 원본과 같은 자료형, 크기의 새로운 배열을 만들고
+		//	 원본의 데이터를 모두 복사하는 방법
+		// === 복제
+		
+		// 깊은 복사 : 원본 데이터를 보존하면서 복사본의 데이터 가공을 진행하는 경우
+		
+		
+		int[] arr = {99, 70, 80, 50, 40};
+		
+		// 깊은 복사를 위한 배열 선언 및 할당
+		int[] copyArr = new int[arr.length];
+		
+		// 원본 데이터를 모두 복사
+		
+		// 1) for문을 이용한 방법 (index가 동일하다는 특징을 이용)
+//		for(int i=0; i<copyArr.length; i++) {
+//			copyArr[i] = arr[i]; 
+//		}
+		
+	    // 2. System.arraycopy(원본배열, 원본 복사 시작 인덱스, 복사배열, 복사배열의 삽입 시작 인덱스, 복사길이); 
+//		System.arraycopy( arr, 0, copyArr, 0, copyArr.length);
+		
+		// 3. 복사할 배열 변수 = Arrays.copyOf(원본 배열, 복사할 길이)
+//		copyArr = Arrays.copyOf(arr, arr.length);
+		
+		// 주소 확인 -> 다름
+		System.out.println("arr : " + arr);
+		System.out.println("copyArr : " + copyArr);
+		
+		// 값 변경
+		System.out.println("[변경 전]");
+		System.out.println("arr : " + Arrays.toString(arr));
+		System.out.println("copyArr : " + Arrays.toString(copyArr));
+		
+		// 복사본의 값을 변경하자 복사본만 바뀌고 원본에는 영향이 없음
+		// -> 데이터 공유 x -> 서로 다른 배열!
+		copyArr[2] = 10000;
+		
+		System.out.println("[변경 후]");
+		System.out.println("arr : " + Arrays.toString(arr));
+		System.out.println("copyArr : " + Arrays.toString(copyArr));
+		
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void ex11() {
+		
+		// null 의미
+		// -참조하는 것(배열, 객체)이 없다
+		
+		int[] arr1 = new int[3];
+		
+		System.out.println(arr1 == null);
+		// arr1 == null is false >>> arr1 참조 변수가 무언가를 참조하고 있다.
+		
+		if(arr1 != null) { // arr1이 참조하는 배열이 있을 때에만 수행
+			System.out.println(arr1[0]);
+		}
+		
+		System.out.println("=================================");
+		
+		// int[] arr2;
+		// 배열 참조변수를 선언만 했을 때는 -> 저장된 값이 없음
+		// 그래서 print문으로 출력하려고 하면 오류 발생함
+		
+		int[] arr2 = null;
+		// 배열 참조변수를 선언 및 null로 초기화 -> 값을 가짐!
+		// 값을 가지고 있으나, 참조하는게 없다는 뜻
+		
+		System.out.println(arr2); 
+		
+		// arr2가 참조하는 배열이 없을 때 새로운 배열을 생성하여 그 배열의 시작주소를
+		// arr2에 대입한다
+		if(arr2 == null) {
+			arr2 = new int[4];
+		}
+		
+		System.out.println(arr2);
+		// null값에서 어떤 배열의 주소값으로 바뀜!!
+	}
 	
 }

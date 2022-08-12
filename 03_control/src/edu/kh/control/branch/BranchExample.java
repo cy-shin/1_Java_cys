@@ -292,6 +292,47 @@ public class BranchExample {
 			//		3	2	1	바위 - 가위 	-1  가위 -	바위 	1
 			//		가위	바위	보	가위 - 보 	2	보 	-	가위 -2
 			//					보	- 바위 	-1 	바위 -	보 	1
+		Scanner sc = new Scanner(System.in);
+		System.out.print("몇 판? : ");
+		int round = sc.nextInt();
 		
+		int player = 0;
+		
+		int win = 0;
+		int draw = 0;
+		int lose = 0;
+
+		for(int i=0; i<round; i++) {
+			System.out.print("\n가위 바위 보 입력 : ");
+			switch(sc.next()) {
+			case "가위" : player = 3; break;
+			case "바위" : player = 2; break;
+			case "보" : player = 1; break;
+			}
+			
+			int com = (int)(Math.random() * 3)+1;
+			
+			int result = player - com;
+			
+			switch(com) {
+			case 3 : System.out.println("\n컴퓨터는 가위를 냈습니다.\n"); break;
+			case 2 : System.out.println("\n컴퓨터는 바위를 냈습니다.\n"); break;
+			case 1 : System.out.println("\n컴퓨터는 보를 냈습니다.\n"); break;
+			}
+			
+			if(result == 0) {
+				System.out.println("비겼습니다.");
+				draw++;
+			} else {
+				if(result == -1 || result == 2) {
+					System.out.println("플레이어 승!");
+					win++;
+				} else {
+					System.out.println("졌습니다 ㅠㅠ");
+					lose++;
+				}
+			}
+			System.out.printf("승 : %d 무 : %d 패 : %d\n", win, draw, lose);
+		}
 	}
 }
