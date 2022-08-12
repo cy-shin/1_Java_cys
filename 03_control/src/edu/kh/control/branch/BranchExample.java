@@ -166,9 +166,11 @@ public class BranchExample {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		// 숫자를 이용해서도 풀어보기
+		
 		// game : 게임 횟수
 		
-		// me : 내가 낸 값
+		// player : 내가 낸 값
 		// ran : 컴퓨터의 값 설정을 위한 난수
 		// com : 컴퓨터의 값
 		
@@ -177,73 +179,119 @@ public class BranchExample {
 		// draw : 무
 		
 		System.out.print("몇판? : ");
-		int game = sc.nextInt();
+		int round = sc.nextInt();
 		
 		int win = 0;
 		int lose = 0;
 		int draw = 0;
 		
 		System.out.println("============ 게임 시작 ============");
-		for(int i=1; i<=game; i++) {
-			System.out.println(i + "번째 게임");
+		for(int i=1; i <=round; i++) { // game번 만큼 반복실행
+			System.out.println("\n" + i + "번째 게임");
 			
 			System.out.print("가위/바위/보 중 하나를 입력해주세요 : ");
-			String me = sc.next();
+			String player = sc.next();
 			
-			if(!(me.equals("가위") || me.equals("바위") || me.equals("보"))) {
+			if(!(player.equals("가위") || player.equals("바위") || player.equals("보"))) {
 				System.out.println("\n다시 입력해주세요.\n");
 				i--;
 				continue;
 			}
 			
-			int ran = (int)(Math.random()*3);
+			int ran = (int)(Math.random()*3); // 컴퓨터의 가위-바위-보 지정
 			
-			String com = "";
+			String com = null; // null(String의 기본 값)로 초기화
 			
-			
-			if(ran == 0) {
-				com = "가위";
-			} else if(ran == 1) {
-				com = "바위";
-			} else {
-				com = "가위";
+			switch(ran) {
+			case 0: com = "가위"; break;
+			case 1: com = "바위"; break;
+			case 2: com = "보"; break;
 			}
 			
 			System.out.printf("\n컴퓨터는 [%s]를 선택했습니다.\n", com);
 			
-			
-			if(com.equals(me)) {
+			if(com.equals(player)) { // 두 자료형 다 기본자료형이 아니르모 .equals()를 사용해서 비교해야 한다.
 				System.out.println("비겼습니다.");
 				draw++;
-			} else if(com.equals("가위")) {
-				if(me.equals("바위")) {
+			} else {
+				boolean win1 = player.equals("가위") && com.equals("보");
+				boolean win2 = player.equals("바위") && com.equals("가위");
+				boolean win3 = player.equals("보") && com.equals("바위");
+				if(win1 || win2 || win3) {
 					System.out.println("플레이어 승!");
 					win++;
 				} else {
 					System.out.println("졌습니다 ㅠㅠ");
 					lose++;
 				}
-			} else if(com.equals("바위")) {
-				if(me.equals("보")) {
-					System.out.println("플레이어 승!");
-					win++;
-				} else{
-					System.out.println("졌습니다 ㅠㅠ");
-					lose++;
-				}
-			} else if(com.equals("보")) {
-				if(me.equals("가위")) {
-					System.out.println("플레이어 승!");
-					win++;
-				} else{
-					System.out.println("졌습니다 ㅠㅠ");
-					lose++;
-				}
 			}
+			
 			System.out.printf("\n현재 기록 : %d승 %d무 %d패\n\n", win, draw, lose);
+			
+//			System.out.println("\n" + i + "번째 게임");
+//			
+//			System.out.print("가위/바위/보 중 하나를 입력해주세요 : ");
+//			String player = sc.next();
+//			
+//			if(!(player.equals("가위") || player.equals("바위") || player.equals("보"))) {
+//				System.out.println("\n다시 입력해주세요.\n");
+//				i--;
+//				continue;
+//			}
+//			
+//			int ran = (int)(Math.random()*3); // 컴퓨터의 가위-바위-보 지정
+//			
+//			String com = null; // null(String의 기본 값)로 초기화
+			
+//			if(ran == 0) {
+//				com = "가위";
+//			} else if(ran == 1) {
+//				com = "바위";
+//			} else {
+//				com = "보";
+//			}
+			
+//			System.out.printf("\n컴퓨터는 [%s]를 선택했습니다.\n", com);
+			
+//			if(com.equals(player)) { // 두 자료형 다 기본자료형이 아니르모 .equals()를 사용해서 비교해야 한다.
+//				System.out.println("비겼습니다.");
+//				draw++;
+//			} else if(com.equals("가위")) {
+//				if(player.equals("바위")) {
+//					System.out.println("플레이어 승!");
+//					win++;
+//				} else {
+//					System.out.println("졌습니다 ㅠㅠ");
+//					lose++;
+//				}
+//			} else if(com.equals("바위")) {
+//				if(player.equals("보")) {
+//					System.out.println("플레이어 승!");
+//					win++;
+//				} else{
+//					System.out.println("졌습니다 ㅠㅠ");
+//					lose++;
+//				}
+//			} else {
+//				if(player.equals("가위")) {
+//					System.out.println("플레이어 승!");
+//					win++;
+//				} else{
+//					System.out.println("졌습니다 ㅠㅠ");
+//					lose++;
+//				}
+//			}
+			
+//			System.out.printf("\n현재 기록 : %d승 %d무 %d패\n\n", win, draw, lose);
 				
 		}
 	
 	}
 
+	public void rpsGame2() {
+			//		3	2	1	바위 - 가위 	-1  가위 -	바위 	1
+			//		가위	바위	보	가위 - 보 	2	보 	-	가위 -2
+			//					보	- 바위 	-1 	바위 -	보 	1
+		
+	}
 }
