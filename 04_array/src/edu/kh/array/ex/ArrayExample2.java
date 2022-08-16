@@ -18,6 +18,29 @@ public class ArrayExample2 {
 		// (1개 자료형, n개 데이터)
 	
 	// 가변 배열
+	
+	
+	
+//	public void ex99() {
+//		// 빙고
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("몇 칸? : ");
+//		int a = sc.nextInt();
+//		
+//		String[][] bingo = new String[a][a];
+//		
+//		for(int i=0; i<bingo.length; i++) {
+//			for(int j=0; j<bingo[i].length; j++) {
+//				
+//				int ran = (int)(Math.random() * (a*a))+1;
+//				bingo[i][j] = Integer.toString(ran); 
+//			}
+//		}
+//		
+//			// 중복값 제거할 수 있게 만들기
+//		
+//	}
+
 	public void ex1() {
 		// 2차원 배열의 선언 및 할당
 		int[][] arr = new int[2][3];
@@ -152,7 +175,6 @@ public class ArrayExample2 {
 			System.out.println(); // 줄바꿈
 		}
 	}
-
 
 
 
