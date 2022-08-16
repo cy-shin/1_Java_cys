@@ -31,6 +31,19 @@ public class PracticeWeek2 {
 		
 		
 	}
+
+	public void operator() {
+		int j = 0;
+		for(int i = 0; i<10; i++) {
+			System.out.println("j = " + j++);
+		}
+		j = 0;
+		for(int i = 0; i<10; ++i) {
+			System.out.println("j = " + ++j);
+		}
+	}
+	
+	
 	
 	public void condition() {
 		// if문
@@ -73,6 +86,10 @@ public class PracticeWeek2 {
 			break;
 		}
 		
+		// 삼항연산자
+		int price = 50000;
+		boolean buy = price>5000? true: false;
+		System.out.println(buy);
 	}
 
 	public void loop() {
@@ -158,5 +175,41 @@ public class PracticeWeek2 {
 		arr3Copy2 = Arrays.copyOf(arr3, arr3.length);
 		System.out.println("arr3Copy2 주소 = " + arr3Copy2);
 		System.out.println("arr3Copy2 = " + Arrays.toString(arr3Copy2));
+		
+		
 	}
+
+	public void array2() {
+		
+		int[] arr = {1, 2, 3, 4, 5};
+		
+		// 얕은 복사
+		int[] arrShallow = new int[5];
+		arrShallow = arr;
+		
+		System.out.println("주소값 : " + arr);
+		System.out.println("주소값 : " + arrShallow);
+		
+		System.out.println("arr : " + Arrays.toString(arr));
+		System.out.println("arr : " + Arrays.toString(arrShallow));
+		
+		// 깊은 복사
+		int[] arrDeep = new int[5];
+		System.arraycopy(arr, 0, arrDeep, 0, arrDeep.length);
+		System.out.println("arr : " + Arrays.toString(arr));
+		System.out.println("arrDeep : " + Arrays.toString(arrDeep));
+		
+		// 깊은 복사 2
+		int[] arrDeep2 = new int[5];
+		arrDeep2 = Arrays.copyOf(arr, arrDeep.length);
+		System.out.println("arr : " + Arrays.toString(arr));
+		System.out.println("arrDeep2 : " + Arrays.toString(arrDeep2));
+		
+		
+		// 2차원 배열
+		int[][] arrDimension = new int[5][7];
+		int[][] arrDimension2;
+		arrDimension = new int[5][7];
+	}
+
 }
