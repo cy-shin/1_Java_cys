@@ -524,8 +524,224 @@ public class ArrayPractice {
 		}
 	}
 	
-	public void practice21() {
+	public void practice21() { // 덩어리를 2개로 나누지 말고 해결해보기
+		String[] students = {"강건강", "남나나", "도대담", "류라라", "문미미", "박보배", "송성실", "윤예의", "진재주", "차천축", "피풍표", "홍하하"};
+		
+		String[][] newArr1 = new String[3][2];
+		
+		String[][] newArr2 = new String[3][2];
+		
+		int index = 0;
+		
+		// 새 배열
+		System.out.println("== 1분단 ==");
+		for(int i=0; i<newArr1.length; i++) {
+			for(int j=0; j<newArr1[i].length; j++) {
+				newArr1[i][j] = students[index++];
+				System.out.print(newArr1[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		// 새 배열2
+		System.out.println("== 2분단 ==");
+		for(int i=0; i<newArr2.length; i++) {
+			for(int j=0; j<newArr2[i].length; j++) {
+				newArr2[i][j] = students[index++];
+				System.out.print(newArr2[i][j] + " ");
+			}
+			System.out.println();
+		}
 		
 	}
 	
+	public void practice22() { // 위와 동일...
+
+		Scanner sc = new Scanner(System.in);
+		
+		String[] students = {"강건강", "남나나", "도대담", "류라라", "문미미", "박보배", "송성실", "윤예의", "진재주", "차천축", "피풍표", "홍하하"};
+		
+		String[][] newArr1 = new String[3][2];
+		
+		String[][] newArr2 = new String[3][2];
+		
+		int index = 0;
+		
+		// 새 배열
+		System.out.println("== 1분단 ==");
+		for(int i=0; i<newArr1.length; i++) {
+			for(int j=0; j<newArr1[i].length; j++) {
+				newArr1[i][j] = students[index++];
+				System.out.print(newArr1[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		// 새 배열2
+		System.out.println("== 2분단 ==");
+		for(int i=0; i<newArr2.length; i++) {
+			for(int j=0; j<newArr2[i].length; j++) {
+				newArr2[i][j] = students[index++];
+				System.out.print(newArr2[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		while(true) {
+			boolean flag = false;
+			System.out.println("====================================");
+			System.out.print("검색할 학생 이름을 입력하세요(종료는 0) : ");
+			String name = sc.next();
+			
+			// 종료
+			if(name.equals("0")) {
+				break;
+			}
+			
+			String side = "";
+			
+			int group = 1;
+			
+			for(int i=0; i<newArr1.length; i++) {
+				for(int j=0; j<newArr1[i].length; j++) {
+					if(newArr1[i][j].equals(name)) {
+						flag = true;
+						if(j%2==1) {
+							side = "오른";
+						} else {
+							side = "왼";
+						}
+						System.out.printf("검색하신 %s 학생은 %d분단 %d번째 줄 %s쪽에 있습니다.\n", name, group, i, side);
+					}
+				}
+			}
+			
+			group++;
+			
+			for(int i=0; i<newArr2.length; i++) {
+				for(int j=0; j<newArr2[i].length; j++) {
+					if(newArr2[i][j].equals(name)) {
+						flag = true;
+						if(j%2==1) {
+							side = "오른";
+						} else {
+							side = "왼";
+						}
+						System.out.printf("검색하신 %s 학생은 %d분단 %d번째 줄 %s쪽에 있습니다.\n", name, group, i, side);
+					}
+				}
+			}
+			
+			if(!flag) {
+				System.out.println("해당하는 학생을 찾을 수 없습니다. 이름을 확인해주세요.");
+			}
+			
+		}
+		System.out.println("검색을 종료합니다.");
+	}
+
+	public void practice23() {
+		Scanner sc = new Scanner(System.in);
+		
+		String[][] arr = new String[6][6];
+		
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<arr.length; j++) {
+				arr[i][j] = " ";
+			}
+		}
+		
+		for(int i=1; i<arr.length; i++) {
+			arr[i][0] = Integer.toString(i-1);
+		}
+		
+		for(int i=1; i<arr[0].length; i++) {
+			arr[0][i] = Integer.toString(i-1);
+		}
+		
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<arr.length; j++) {
+				System.out.printf("%2s", arr[i][j]);
+			}
+			System.out.println();
+		}
+		
+		System.out.println("===============================");
+		System.out.print("행 인덱스 입력 : ");
+		int row = sc.nextInt();
+		
+		System.out.print("열 인덱스 입력 : ");
+		int col = sc.nextInt();
+		
+		arr[row+1][col+1] = "X";
+		
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<arr.length; j++) {
+				System.out.printf("%2s", arr[i][j]);
+			}
+			System.out.println();
+		}
+	}
+
+	public void practice24() {
+		Scanner sc = new Scanner(System.in);
+		
+		// 2차원 배열 생성
+		String[][] arr = new String[6][6];
+		
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<arr.length; j++) {
+				arr[i][j] = " ";
+			}
+		}
+		
+		for(int i=1; i<arr.length; i++) {
+			arr[i][0] = Integer.toString(i-1);
+		}
+		
+		for(int i=1; i<arr[0].length; i++) {
+			arr[0][i] = Integer.toString(i-1);
+		}
+		
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<arr.length; j++) {
+				System.out.printf("%2s", arr[i][j]);
+			}
+			System.out.println();
+		}
+		
+		// 반복문 시작
+		while(true) {
+			System.out.print("행 인덱스 입력 : ");
+			int row = sc.nextInt();
+			if(row == 99) {
+				System.out.println("프로그램 종료");
+				break;
+			} 
+			System.out.print("열 인덱스 입력 : ");
+			int col = sc.nextInt();
+			
+			if(row>=arr.length-1 || col>=arr[0].length-1) {
+				System.out.println("잘못된 입력입니다.");
+				continue;
+			}
+			
+			if(arr[row+1][col+1] == "X") {
+				System.out.println("이미 선택된 좌표입니다.");
+				continue;
+			} 
+				
+			arr[row+1][col+1] = "X";
+			
+			for(int i=0; i<arr.length; i++) {
+				for(int j=0; j<arr.length; j++) {
+					System.out.printf("%2s", arr[i][j]);
+				}
+				System.out.println();
+			}
+			
+		}
+	
+	}
+
 }
