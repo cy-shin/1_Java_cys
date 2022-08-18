@@ -49,22 +49,24 @@ public class BingoGame {
 		// 빙고판 출력
 		for(int i=0; i<bingo.length; i++) {
 			for(int j=0; j<bingo[i].length; j++) {
-				System.out.printf("%3s",bingo[i][j]);
+				System.out.printf("%s\t",bingo[i][j]);
 			}
 			System.out.println();
 		}
 		
 		System.out.println("=================== 빙고게임 시작 ====================");
 		
-		boolean game = true; // 빙고 3줄이면 false로 바뀜
+		// boolean game = true; // 빙고 3줄이면 false로 바뀜
 		
-		while(game) {
+		while(true) {
 			int count = 0; // bingo 줄 카운트...
 			boolean flagInput = false;
 			
 			
 			System.out.print("정수를 입력하시오 : ");
 			String input = sc.next();
+			
+			System.out.println("================================================");
 			
 			for(int i=0; i<bingo.length; i++) {
 				for(int j=0; j<bingo[i].length; j++) {
@@ -140,23 +142,23 @@ public class BingoGame {
 			// 빙고판 출력
 			for(int i=0; i<bingo.length; i++) {
 				for(int j=0; j<bingo[i].length; j++) {
-					System.out.printf("%3s",bingo[i][j]);
+					System.out.printf("%s\t",bingo[i][j]);
 				}
 				System.out.println();
 			}
 			
-			System.out.printf("현재 %d빙고", count);
-			System.out.println(); // 줄바꿈
-			System.out.println(); // 줄바꿈
-			
 			// 빙고 개수 검사
 			if(count>=3) {
-				System.out.println("*** BINGO!!! ***");
-				game = false;
-			
+				// game = false;
+				break;
 			}
-		
+			
+			System.out.println(); // 줄바꿈
+			System.out.printf("현재 %d빙고", count);
+			System.out.println(); // 줄바꿈
 		}
+		System.out.println();
+		System.out.println("*** BINGO!!! ***");
 	
 	}
 }

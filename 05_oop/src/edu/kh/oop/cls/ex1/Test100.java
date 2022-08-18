@@ -1,4 +1,4 @@
-package edu.kh.oop.c1s.ex1;
+package edu.kh.oop.cls.ex1;
 
 class Test100 {
 	public int a;

@@ -1,8 +1,6 @@
-package edu.kh.oop.c1s.ex1;
+package edu.kh.oop.cls.ex1;
 
-import edu.kh.oop.c1s.ex2.Test2;
-// The type edu.kh.oop.c1s.ex2.Test2 is not visible
-// == default 클래스 : 다른 패키지의 클래스에서 import가 불가능함
+import edu.kh.oop.cls.ex2.Test2;
 
 // import : 다른패키지에 존재하는 클래스를 현재 클래스로 가져오는 것.
 
