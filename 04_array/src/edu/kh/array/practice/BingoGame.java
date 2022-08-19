@@ -3,50 +3,43 @@ package edu.kh.array.practice;
 import java.util.Scanner;
 
 public class BingoGame {
-	// 빙고게임을 만들어 보기
-	// 숫자를 섞지 않고 난수를 입력하고 중복을 제거해서 해보기
-	
 	public static void main(String[] args) {
-
+		// 빙고게임 도전
+		// 빙고판을 만들고, 숫자를 1부터 빙고판이 가득 찰 때까지 차례대로 저장한 후, 순서를 섞어서 빙고판을 만듦
+	
 		Scanner sc = new Scanner(System.in);
-		System.out.print("빙고판 크기 지정 : ");
-		int width = sc.nextInt();
-	
-		String[][] bingo = new String[width][width];
-	
-		int num = 0; // 난수 입력을 위한 정수
 		
-		// 1 부터 차례대로 빙고판을 채움
+		// 1. 빙고판 크기 지정
+		System.out.print("빙고판 크기 지정 : ");
+		int size = sc.nextInt();
+	
+		// 2. 빙고판에 쓸 배열을 생성함
+		String[][] bingo = new String[size][size];
+	
+		int num = 0; // 숫자 입력을 위한 정수
+		
+		// 3-1. 1 부터 차례대로 빙고판을 채움
 		for(int row=0; row<bingo.length; row++) {
 			for(int col=0; col<bingo.length; col++) {
 				bingo[row][col] = Integer.toString(++num);
 			}
 		}
 		
-//		// 임시 출력
-//		for(int i=0; i<bingo.length; i++) {
-//			for(int j=0; j<bingo[i].length; j++) {
-//				System.out.printf("%3s",bingo[i][j]);
-//			}
-//			System.out.println();
-//		}
-		
-		// 섞기
+		// 3-2. 섞기
 		for(int row=0; row<bingo.length; row++) {
 			for(int col=0; col<bingo.length; col++) {
-				int rowRan = (int)(Math.random() * width);
-				int colRan = (int)(Math.random() * width);
 				
-				// 숫자를 무작위로 섞음..
+				int rowRan = (int)(Math.random() * size);
+				int colRan = (int)(Math.random() * size);
+				
 				String temp = bingo[rowRan][colRan];
 				bingo[rowRan][colRan] = bingo[row][col];
 				bingo[row][col] = temp;
 			}
 		}
 
-		//		System.out.println("숫자를 섞었습니다.");
 		
-		// 빙고판 출력
+		// 4. 빙고판 출력
 		for(int i=0; i<bingo.length; i++) {
 			for(int j=0; j<bingo[i].length; j++) {
 				System.out.printf("%s\t",bingo[i][j]);
@@ -54,38 +47,39 @@ public class BingoGame {
 			System.out.println();
 		}
 		
+		// 5. 빙고 게임 시작
 		System.out.println("=================== 빙고게임 시작 ====================");
 		
-		// boolean game = true; // 빙고 3줄이면 false로 바뀜
+		int count; // 빙고 개수 변수
+		boolean inputCheck; // 정상 입력 확인 변수
 		
-		while(true) {
-			int count = 0; // bingo 줄 카운트...
-			boolean flagInput = false;
+		do {
+			// 5-1 변수 초기화
+			count = 0; 
+			inputCheck = false;
 			
-			
+			// 5-2. 정수 입력받아서 해당 위치 ★로 표시
 			System.out.print("정수를 입력하시오 : ");
 			String input = sc.next();
-			
-			System.out.println("================================================");
 			
 			for(int i=0; i<bingo.length; i++) {
 				for(int j=0; j<bingo[i].length; j++) {
 					if(bingo[i][j].equals(input)) {
 						bingo[i][j] = "★";
-						flagInput = true;
+						inputCheck = true; // 정상 입력 확인
 					}
 				}
 			}
 			
-			// 잘못 입력 시
-			if(!flagInput) {
+			// 5-3. 잘못 입력 시
+			if(!inputCheck) {
 				System.out.println("다시 입력해주세요.");
 				continue;
 			}
 			
-			// 빙고 여부 검사
+			// 6. 빙고 개수 검사
 			
-			// 가로줄 검사
+			// 6-1. 가로줄 검사
 			for(int i=0; i<bingo.length; i++) {
 				boolean flag = true;
 				for(int j=0; j<bingo[i].length; j++) {
@@ -98,7 +92,7 @@ public class BingoGame {
 				}
 			}
 			
-			// 세로줄 검사
+			// 6-2. 세로줄 검사
 			for(int i=0; i<bingo.length; i++) {
 				boolean flag = true;
 				for(int j=0; j<bingo[i].length; j++) {
@@ -111,7 +105,7 @@ public class BingoGame {
 				}
 			}
 			
-			// 대각선1 검사
+			// 6-3. 우하향 대각선 검사
 			while(true) {
 				boolean flag = true;
 				for(int i=0; i<bingo[0].length; i++) {
@@ -125,11 +119,11 @@ public class BingoGame {
 				break;
 			}
 			
-			// 대각선 2 검사
+			// 6-4. 우상향 대각선 검사
 			while(true) {
 				boolean flag = true;
 				for(int j=0; j<bingo[0].length; j++) {
-					if(!(bingo[j][width-1-j].equals("★"))) {
+					if(!(bingo[j][size-1-j].equals("★"))) {
 						flag = false;
 					}
 				}
@@ -139,7 +133,7 @@ public class BingoGame {
 				break;
 			}
 			
-			// 빙고판 출력
+			// 7. 빙고판 출력
 			for(int i=0; i<bingo.length; i++) {
 				for(int j=0; j<bingo[i].length; j++) {
 					System.out.printf("%s\t",bingo[i][j]);
@@ -147,19 +141,17 @@ public class BingoGame {
 				System.out.println();
 			}
 			
-			// 빙고 개수 검사
+			// 7-1. 빙고 개수 확인
+			System.out.printf("현재 %d빙고\n", count);
+			
+			// 7-2. 빙고 개수 검사
 			if(count>=3) {
-				// game = false;
 				break;
 			}
 			
-			System.out.println(); // 줄바꿈
-			System.out.printf("현재 %d빙고", count);
-			System.out.println(); // 줄바꿈
-		}
-		System.out.println();
+		} while(true);
+		
 		System.out.println("*** BINGO!!! ***");
-	
 	}
 }
 

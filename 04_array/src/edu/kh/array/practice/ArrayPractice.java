@@ -266,27 +266,39 @@ public class ArrayPractice {
 	
 	public void practice13() {
 		Scanner sc = new Scanner(System.in);
+		
 		System.out.print("문자열 : ");
 		String str = sc.next();
 		
 		char[] arr = new char[str.length()];
 		
-		// 1. 먼저 문자열의 내용을 문자 배열에 옮기기
+		// 문자열의 내용을 문자 배열 arr에 옮기기
 		for(int i=0; i<str.length(); i++) {
 			arr[i]=str.charAt(i); 
 		}
 		
-		// 개수를 셀 때 사용할 변수 count
-		int count = 0;
+		int count = 0; // 문자 개수 셀 변수
 		
+		// 문자의 중복을 검사하고, 중복문자가 아니면 출력하는 반복문
 		for(int i=0; i<arr.length; i++) {
-			boolean flag = true;
+			
+			boolean flag = true; // 중복 변수 flag (중복 시 false)
+			
+			// 중복확인
 			for(int j=0; j<i; j++) {
 				if(arr[i]==arr[j]) {
+					
+					// 중복이 있으면 flag = false
 					flag = false;
+
+					// 중복을 발견했으면 더 검사할 필요가 없으니 중복확인 종료
 					break;
 				}
 			}
+			
+			// 변수 flag를 확인
+			// flag = true면( = 중복 문자가 아니면) count에 1을 추가하고 문자를 출력함
+			// flag = false면 무시
 			if(flag) {
 				count++;
 				System.out.print(arr[i]);
@@ -294,9 +306,11 @@ public class ArrayPractice {
 					System.out.print(", ");
 				}
 			}
-		}
+		} // 반복문 종료
+		
 		System.out.println();
 		System.out.println("문자 개수 : " + count);
+		
 	}
 
 	public void practice14() {
@@ -650,6 +664,7 @@ public class ArrayPractice {
 				arr[i][j] = " ";
 			}
 		}
+		
 		
 		for(int i=1; i<arr.length; i++) {
 			arr[i][0] = Integer.toString(i-1);
