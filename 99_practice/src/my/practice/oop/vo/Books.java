@@ -5,14 +5,14 @@ public class Books {
 	
 	private String bookName;
 	private String author;
-	private int lent;
+	private String lent;
 	private String dueDate;
 	
 	// 기본 생성자
 	public Books() {}
 	
 	// 매개변수 생성자
-	public Books(String bookName, String author, int lent, String dueDate) {
+	public Books(String bookName, String author, String lent, String dueDate) {
 		
 		this.bookName = bookName;
 		this.author = author;
@@ -39,11 +39,11 @@ public class Books {
 		this.author = author;
 	}
 
-	public int getLent() {
+	public String getLent() {
 		return lent;
 	}
 
-	public void setLent(int lent) {
+	public void setLent(String lent) {
 		this.lent = lent;
 	}
 

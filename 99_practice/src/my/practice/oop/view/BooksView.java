@@ -33,7 +33,7 @@ public class BooksView {
 			
 			switch(input) {
 			case 1: this.selectBooks(); break;
-			case 2: break;
+			case 2: this.manageBooks(); break;
 			case 3: break;
 			case 0: System.out.println("종료합니다."); break;
 			default : 
@@ -48,7 +48,7 @@ public class BooksView {
 	
 	public void selectBooks() {
 		System.out.print("도서 제목 입력 > ");
-		String bookName = sc.next();
+		String bookName = sc.nextLine();
 		
 		// 서비스 메서드를 호출
 		Books[] resultArr = service.selectBooks(bookName);
@@ -62,10 +62,10 @@ public class BooksView {
 				} else {
 					System.out.println("\n-------------");
 					char lentCh = 'X';
-					if(resultArr[i].getLent()==1) {
+					if(resultArr[i].getLent().equals("Y")) {
 						lentCh = 'O';
 					}
-					System.out.printf("제목 : %s\n저자 : %s\n대출상태 : %s\n반납기한 : %s\n",
+					System.out.printf("제목 : %s\n저자 : %s\n대출가능 : %s\n반납기한 : %s\n",
 									resultArr[i].getBookName(),
 									resultArr[i].getAuthor(),
 									lentCh,
@@ -73,6 +73,22 @@ public class BooksView {
 					System.out.println("-------------\n");
 				}
 			}
+		}
+	}
+	
+	public void manageBooks() {
+		System.out.print("도서 제목 입력 > ");
+		String bookName = sc.nextLine();
+		
+		System.out.print("대출/반납 처리(Y/N) > ");
+		String lent = sc.next();
+		
+		int result = service.manageBooks(bookName,lent);
+		switch(result) {
+		case 1: System.out.println("대출처리되었습니다. ");break;
+		case 0: System.out.println("반납처리되었습니다. ");break;
+		case -1: System.out.println("책 제목을 확인해주세요. ");break;
+		case -2: System.out.println("취소.");break;
 		}
 	}
 }
