@@ -13,8 +13,8 @@ public class Student extends Person{
 //	private String name;
 //	private int age;
 	
-	private int classRoom;
 	private int grade;
+	private int classRoom;
 	
 //	public String getName() {
 //		return name;

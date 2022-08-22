@@ -119,7 +119,8 @@ public class StudentManagementService {
 			
 			// 학생 이름.equals(입력 이름)
 			if(name.equals(stdArr[i].getName())) {
-				resultArr[resultIdx++] = stdArr[i];
+				resultArr[resultIdx] = stdArr[i];
+				resultIdx++;
 				// 대입되는 인덱스(resultIdx)를 다음으로 이동시키겠다
 			}
 		}
