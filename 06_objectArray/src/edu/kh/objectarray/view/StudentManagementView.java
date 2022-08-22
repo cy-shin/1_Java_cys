@@ -43,7 +43,7 @@ public class StudentManagementView {
 			case 1: this.addStudent(); break;
 			case 2: this.printAll(); break;
 			case 3: this.selectIndex(); break;
-			case 4: break;
+			case 4: this.selectName(); break;
 			case 5: this.updateStudent(); break;
 			case 0: System.out.println("프로그램을 종료합니다."); break;
 			default: System.out.println("잘못 입력 하셨습니다.");
@@ -131,6 +131,48 @@ public class StudentManagementView {
 		// 학생 1명 정보 조회 서비스 메서드 호출
 		System.out.println(service.selectIndex(idx));
 	}
+	
+	
+	
+	/**
+	 *  학생 정보 조회 (이름 검색) 메서드
+	 */
+	public void selectName() {
+		System.out.println("[학생 정보 조회(이름 검색)]");
+		
+		// 이름을 입력 받아서
+		System.out.print("이름 : ");
+		String name = sc.next();
+		System.out.println();
+		
+		// 학생 정보 조회(이름) 서비스 메서드 호출 후 결과를 받환받음
+		Student[] resultArr = service.selectName(name);
+		
+		if(resultArr == null) {
+			System.out.println("검색 결과가 없습니다.");
+		} else {
+			
+			for(int i=0; i<resultArr.length; i++) {
+				
+				if(resultArr[i] == null) {
+					break;
+				}
+				
+				System.out.printf("%s(%2d학년 %2d반 %2d번)\n",
+									resultArr[i].getName(),
+									resultArr[i].getGrade(),
+									resultArr[i].getClassRoom(),
+									resultArr[i].getNumber() );
+			}
+		}
+		
+		
+		// service 메서드를 호출하고 입력받은 이름을 인자로 사용
+		// System.out.println(service.selectName(name));
+	}
+	
+	
+	
 	
 	/** 
 	 *  학생 정보(점수) 수정 메서드

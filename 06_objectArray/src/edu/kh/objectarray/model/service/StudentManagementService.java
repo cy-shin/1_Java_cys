@@ -12,13 +12,13 @@ public class StudentManagementService {
 	// 기본 생성자
 	public StudentManagementService() {
 		stdArr[0] = new Student(3, 5, 17, "홍길동", 100, 30,  70);
-		stdArr[1] = new Student(2, 3, 11, "박철수", 50,  100, 80);
+		stdArr[1] = new Student(2, 3, 11, "홍길동", 50,  100, 80);
 		stdArr[2] = new Student(1, 7,  3, "김미영", 100, 100, 30);
 		stdArr[3] = new Student(3, 8,  6, "장원영", 50,  70,  100);
 	}
 	
 	
-	
+
 	// view에 입력한 addStudent의 값을 전달받아 처리하는 메서드
 	
 	/** 학생 추가 서비스 메서드
@@ -88,6 +88,78 @@ public class StudentManagementService {
 				return str;
 			}
 		}
+	}
+	
+	
+	/** 학생 정보 조회(이름) 서비스 메서드
+	 * @param name (입력받은 이름)
+	 * @return 
+	 * null : 검색 결과가 없음
+	 * resultArr(null 아님) : 검색 결과가 있음
+	 */
+	public Student[] selectName(String name) {
+		
+		// stdArr 객체 배열의 각 인덱스가 참조하는 Student 객체가 있음.
+		// student 객체의 필드 값 중 name과 입력받은 name이 일치하면
+		// 해당 Student 객체의 주소를 별도 객체 배열에 저장해서 메서드 종료시 반환
+		
+		// 검색 결과 저장용 객체 배열
+		Student[] resultArr = new Student[stdArr.length];
+		
+		
+		// resultArr에서 값을 대입할 인덱스 번호를 나타내는 변수~
+		int resultIdx = 0;
+		
+		// stdArr 배열에 순차접근 하려고 함
+		for(int i=0; i<stdArr.length; i++) {
+			
+			if(stdArr[i] == null) {
+				break; // 반복 종료
+			}
+			
+			// 학생 이름.equals(입력 이름)
+			if(name.equals(stdArr[i].getName())) {
+				resultArr[resultIdx++] = stdArr[i];
+				// 대입되는 인덱스(resultIdx)를 다음으로 이동시키겠다
+			}
+		}
+		
+		// 검색할 수 없는 경우
+		if(resultIdx == 0) {
+			return null;
+		} else {
+			return resultArr;
+		}
+		
+//		boolean flag = false; // 검색 결과가 있으면 true 없으면 false;
+//		String str = "";
+//		
+//		for(int i=0; i<stdArr.length; i++) {
+//			String temp = "";
+//			if(stdArr[i] == null) {
+//				break;
+//			}
+//			if(name.equals(stdArr[i].getName())) {
+//				flag = true;
+//				temp += "\n------------------";
+//				temp += "\n이름	: " + stdArr[i].getName();
+//				temp += "\n학년	: " + stdArr[i].getGrade();
+//				temp += "\n반	: " + stdArr[i].getClassRoom();
+//				temp += "\n번호	: " + stdArr[i].getNumber();
+//				temp += "\n국어	: " + stdArr[i].getKor() + "점";
+//				temp += "\n영어	: " + stdArr[i].getEng() + "점";
+//				temp += "\n수학	: " + stdArr[i].getMath() + "점";
+//				temp += "\n------------------\n";
+//			} 
+//			str += temp;
+//		}
+//		
+//		if(!flag) {
+//			str = "해당하는 학생을 찾을 수 없습니다.";
+//		}
+//		
+//		return str;
+		
 	}
 	
 	/** 학생 정보 수정 서비스 메서드
