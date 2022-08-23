@@ -1,5 +1,6 @@
 package edu.kh.inheritance.model.vo;
 
+import java.io.StringReader;
 
 public class Student extends Person{
 	
@@ -32,7 +33,7 @@ public class Student extends Person{
 		this.grade = grade;
 		this.classRoom = classRoom;
 		
-		// this.age() = age;
+		// this.age = age;
 		// 만약 부모클래스의 멤버변수가 캡슐화되어있다면...
 		// 상속받은 자식클래스도 부모클래스의 private 영역에는 직접 접근할 수 없음
 		
@@ -43,7 +44,7 @@ public class Student extends Person{
 		setAge(age);
 		
 		// 2. super() 생성자를 사용함
-		// super(name, age);
+//		 super(name, age);
 	}
 	
 //	public String getName() {
