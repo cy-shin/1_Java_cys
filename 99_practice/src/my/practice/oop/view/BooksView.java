@@ -76,6 +76,10 @@ public class BooksView {
 		}
 	}
 	
+	/**
+	 *  책 대출 / 반납
+	 *  제목을 입력한 후 책 상태를 받아서 
+	 */	
 	public void manageBooks() {
 		System.out.print("도서 제목 입력 > ");
 		String bookName = sc.nextLine();

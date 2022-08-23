@@ -7,6 +7,7 @@ public class BooksService {
 	private Books[] booksArr = new Books[10];
 	
 	public BooksService() {
+		//							제목		저자		대출가능	반납기한
 		booksArr[0] = new Books("숫타니파타", "작자 미상", "Y", "000000");
 		booksArr[1] = new Books("목민심서", "정약용", "Y", "000000");
 		booksArr[2] = new Books("어린 왕자", "생텍쥐페리", "Y", "000000");
@@ -14,6 +15,7 @@ public class BooksService {
 	}
 	
 	// 책 검색
+	// 제목으로 검색하고, 대출중일때만 반납기한이 나오게 만들어보기
 	public Books[] selectBooks(String bookName) {
 		Books[] resultArr = new Books[booksArr.length];
 		

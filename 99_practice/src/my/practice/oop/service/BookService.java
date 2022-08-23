@@ -1,6 +1,7 @@
 package my.practice.oop.service;
 
 import my.practice.oop.vo.Book;
+import my.practice.oop.vo.Books;
 
 // 입/출력 외 주요 작업을 처리할 메서드
 public class BookService {
@@ -17,15 +18,25 @@ public class BookService {
 	/** 제목이라 저자로 책 검색하기
 	 * @param select : 검색 시 입력값
 	 */
-	public void bookSelect(String select) {
+	public Book[] bookSelect(String select) {
+		
+		Book[] resultArr = new Book[bookArr.length];
+		
+		int resultIdx = 0;
 		
 		for(int i=0; i<bookArr.length; i++) {
-			if(bookArr[i] == null ) { // 참조하는 값이 없는 경우
+			if(bookArr[i] == null ) {
 				break;
 			}
-			if(select.equals(bookArr[i])) {
-				
+			if(select.equals(bookArr[i].getBookName())) {
+				resultArr[resultIdx] = bookArr[i]; 
+				resultIdx++;
 			}
+		}
+		if(resultIdx == 0) {
+			return null;
+		} else {
+			return resultArr;
 		}
 	}
 }
