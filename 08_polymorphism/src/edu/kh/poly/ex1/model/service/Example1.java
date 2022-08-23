@@ -77,6 +77,7 @@ public class Example1 {
 		printCar(arr[2]); // Spark
 	}
 	
+	
 	// 매개변수의 다형성 적용
 	public void printCar(Car c) {
 		System.out.println("자동차 정보 > " + c );
@@ -93,4 +94,105 @@ public class Example1 {
 //	public void printSpark(Spark c) {
 //		System.out.println("자동차 정보 > " + c );
 //	}
+
+
+	public void ex3() {
+		
+		// 다운 캐스팅
+		// - 업 캐스팅이 적용된 상황에서 ( 부모 참조 변수 = 자식 객체 )
+		// - 부모 참조 변수를 자식 타입으로 바꿔(강제형변환, 얕은복사)
+		//   자식 객체를 온전하게 참조할 수 있게 만듦
+		
+		Car c1 = new Spark(4, 4, "휘발유", 0.5);
+		Car c2 = new Truck(12, 3, "경유", 20);
+		
+		
+		Car c3 = new Car(4,5,"휘발유");
+		
+		((Spark)c1).dc();
+		// (Spark) 연산자
+		// . 연산자
+		// . 연산자가 형변환 연산자보다 우선순위가 높음
+		// 따라서 (Spark)c1.dc(); 라고 적으면 c1.dc()가 먼저 실행되므로 오류가 발생함
+		// ((Spark)c1).dc(); 라고 적어서 ((Spark)c1)이 먼저 처리되게 만들어야 함
+		// = 형변환 먼저 진행
+		// -> 부모 타입(Car)이었던 c1을 자식 타입(Spark)로 다운캐스팅
+		
+		// 얕은 복사 + 강제 형변환
+		Truck t2 = (Truck)c2;
+		
+		t2.loading();
+		
+		
+		
+		System.out.println("--------------------------");
+		
+		// instanceof 연산자
+		// - 참조하는 객체의 타입을 검사하는 연산자
+		//   맞으면 true, 아니면 false
+		System.out.println( c1 instanceof Spark);
+		System.out.println( c2 instanceof Spark);
+		System.out.println( c3 instanceof Spark);
+		
+		check(c1);
+		check(c2);
+		check(c3);
+		
+		// 다운 캐스팅을 잘못한 경우......
+//		( (Truck)c3 ).loading();
+		
+		// 코드 상 오류는 없다
+		// ClassCastException : 형변환예외
+		// -> 다운 캐스팅이 잘못된 경우 발생함
+		// instanceof연산자로 다운캐스팅할 타입이 맞는지 확인부터 하자
+		
+		if(c3 instanceof Truck) {
+			( (Truck)c3 ).loading();
+		} else {
+			System.out.println("c3는 트럭 객체가 아닙니다.");
+		}
+	}
+	
+	
+	public void ex4() {
+		// instanceof 연산자 사용 시 검사 순서에 대한 문제점
+		
+		// - instanceof 연산자
+		// 1) 참조하는 객체의 타입을 검사하는 연산자
+		// 2) 참조하는 객체가 특정 타입을 상속 받았는지 검사하는 용도로 사용 가능
+		
+		
+		
+		
+		Car c = new Spark(); // 업캐스팅 상태
+		
+		if(c instanceof Car) {
+			// c가 참조하는 객체는 Spark이지만
+			// 업캐스팅 상태이기 때문에 car로도 인식됨
+			
+			System.out.println("부모 Car타입 입니다.");
+		} else {
+			((Spark)c).dc();
+		}
+		
+	}
+		
+
+	public void check(Car c) {
+		// 전달 받은 c의 타입을 검사해서 고유한 메서드를 호출하게 하겠다
+		if( c instanceof Spark) { // 참조하는 객체가 Spark인 경우
+			((Spark)c).dc();
+		}
+		
+		else if( c instanceof Truck) { // 참조하는 객체가 Truck인 경우
+			((Truck)c).loading();
+		}
+		
+		else { // 참조하는 객체가 Car인 경우
+			System.out.println("Car는 고유 기능이 없습니다.");
+		}
+
+	}
+
+
 }

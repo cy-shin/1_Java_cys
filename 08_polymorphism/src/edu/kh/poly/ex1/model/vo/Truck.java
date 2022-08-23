@@ -36,4 +36,8 @@ public class Truck extends Car{
 		//		부모 클래스에서 오버라이딩한 toString의 내용을 super.를 이용해서 가져옴
 	}
 	
+	public void loading() {
+		System.out.println("물건을 싣을 수 있다.");
+	}
+	
 }
