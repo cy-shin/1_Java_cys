@@ -31,7 +31,8 @@ public class BingoGame2 {
 			
 			// 3-1. 난수 생성
 			int ran = (int)(Math.random() * (size * size)) + 1;
-			String ranStr = Integer.toString(ran);
+			String ranStr = ran + "";
+			// int 타입  ran + "" = String
 			
 			// 3-2. 중복을 확인할 flag
 			boolean flag = true;

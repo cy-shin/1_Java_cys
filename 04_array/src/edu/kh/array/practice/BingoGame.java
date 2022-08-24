@@ -21,7 +21,8 @@ public class BingoGame {
 		// 3-1. 1 부터 차례대로 빙고판을 채움
 		for(int row=0; row<bingo.length; row++) {
 			for(int col=0; col<bingo.length; col++) {
-				bingo[row][col] = Integer.toString(++num);
+				bingo[row][col] = ++num + "";
+				// int타입 num + ""
 			}
 		}
 		
