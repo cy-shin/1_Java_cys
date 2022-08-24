@@ -19,7 +19,7 @@ public class BingoGame2 {
 		// 2-2. 빙고판 초기화
 		for(int i=0; i<bingoArr.length; i++) {
 			for(int j=0; j<bingoArr[i].length; j++) {
-				bingoArr[i][j] = "";
+				bingoArr[i][j] = ""; 
 			}
 		}
 		
@@ -31,7 +31,7 @@ public class BingoGame2 {
 			
 			// 3-1. 난수 생성
 			int ran = (int)(Math.random() * (size * size)) + 1;
-			String ranStr = ran + "";
+			String ranStr = ran + ""; // Integer.toString(ran);
 			// int 타입  ran + "" = String
 			
 			// 3-2. 중복을 확인할 flag
