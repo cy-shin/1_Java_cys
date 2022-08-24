@@ -8,6 +8,7 @@ public class Run {
 		
 //		exam.ex1();
 //		exam.ex2();
-		exam.ex3();
+//		exam.ex3();
+		exam.ex4();
 	}
 }

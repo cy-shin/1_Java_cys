@@ -14,7 +14,6 @@ public class Example {
 	// 1) Checked Exception   : 필수적으로 예외 처리 구문을 작성
 	// 2) Unchecked Exception : 선택적으로 예외 처리 구문을 작성
 	
-	
 	public void ex1() {
 		
 		// Scanner와 유사한 기능을 한 객체(속도는 더 빠름)
@@ -153,5 +152,30 @@ public class Example {
 		
 		
 		
+	}
+
+	public void ex4() {
+		
+		System.out.println("실행");
+		try {
+			ex5(); // throw new IOException();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			// e : 예외 객체(IOException) 참조 변수
+			// Trace : 따라가다
+			// StackTrace : Stack영역에 쌓인, 에러가 발생한 메서드의 순서를 따라가다
+			// printStackTrace : Stack영역에 쌓인, 에러가 발생한 메서드의 순서를 따라가서 출력
+		} 
+	}
+	
+	public void ex5() throws IOException {
+		ex6(); // throw new IOException(); (ex6에서 던진 IOException이 날아옴)
+	}
+	
+	public void ex6() throws IOException {
+					// -> 해당 메서드에서 발생하는 IOException을 호출한 메서드로 던져라 (책임전가)
+		throw new IOException();
 	}
 }
