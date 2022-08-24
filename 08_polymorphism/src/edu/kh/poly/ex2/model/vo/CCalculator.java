@@ -1,6 +1,6 @@
 package edu.kh.poly.ex2.model.vo;
 
-public class SCYCalculator implements Calculator {
+public class CCalculator implements Calculator {
 
 	@Override
 	public int plus(int num1, int num2) {

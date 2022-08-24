@@ -3,7 +3,7 @@ package edu.kh.poly.ex2.model.service;
 import java.util.Scanner;
 
 import edu.kh.poly.ex2.model.vo.Animal;
-import edu.kh.poly.ex2.model.vo.SCYCalculator;
+import edu.kh.poly.ex2.model.vo.CCalculator;
 import edu.kh.poly.ex2.model.vo.Calculator;
 import edu.kh.poly.ex2.model.vo.Fish;
 import edu.kh.poly.ex2.model.vo.HGD;
@@ -36,8 +36,9 @@ public class AbstractionService {
 		Animal a1 = new Fish();
 		Animal a2 = new Person(); // 업캐스팅 (부모 타입 참조변수 = 자식 객체) 확인
 		
-		// 추상 메서드였던 breath() 호출 가능 여부 확인 (== 동적 바인딩 여부 확인)
 		
+		
+		// 추상 메서드였던 breath() 호출 가능 여부 확인 (== 동적 바인딩 여부 확인)
 		a1.breath();
 		a2.breath();
 		// void edu.kh.poly.ex2.model.vo.Animal.breath()
@@ -112,9 +113,9 @@ public class AbstractionService {
 		
 	}
 
-	public void ex3() {
+	public void ex3() {// 인더페이스 예시
 		
-		Calculator cal = new SCYCalculator(); // 다형성 적용됨(업캐스팅)
+		Calculator cal = new CCalculator(); // 다형성 적용됨(업캐스팅)
 		// 부모 타입 Calculator로 SC... 참조
 		
 		Scanner sc = new Scanner(System.in);
@@ -157,6 +158,6 @@ public class AbstractionService {
 	
 	}
 
-
+	
 
 }

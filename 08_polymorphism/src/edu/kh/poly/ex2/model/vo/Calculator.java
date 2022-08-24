@@ -5,6 +5,7 @@ package edu.kh.poly.ex2.model.vo;
 
 
 public interface Calculator {
+	// 상수형 변수 (final 변수명)
 	public static final double PI = 3.14;
 	static final int MAX_NUM = 1000000; // 100만
 	final int MIN_NUM = -1000000; // -100만
@@ -12,6 +13,7 @@ public interface Calculator {
 	// --> 예약어를 어떻게 적든 상관없이, 묵시적으로 public static final이 적용됨
 	
 	
+	// 추상 메서드
 	public abstract int plus(int num1, int num2); // 덧셈
 	abstract int minus(int num1, int num2); // 뺄셈
 	abstract int multiple(int num1, int num2); // 곱셈
