@@ -29,7 +29,8 @@ public class SCYCalculator implements Calculator {
 	@Override
 	public double areaOfCircle(double r) {
 		// TODO Auto-generated method stub
-		return r * r * Calculator.PI;
+		return Calculator.PI * r * r;
+//		return r * r * Calculator.PI;
 			// 인터페이스 활용
 	}
 
