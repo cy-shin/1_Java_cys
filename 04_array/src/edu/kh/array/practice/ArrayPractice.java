@@ -667,11 +667,15 @@ public class ArrayPractice {
 		
 		
 		for(int i=1; i<arr.length; i++) {
-			arr[i][0] = Integer.toString(i-1);
+			arr[i][0] = (i-1)+"";
+			// '문자열 + 다른 기본 자료형 = 문자열'을 기억해둘것
+			// Integer.toString(i-1);
+			
 		}
 		
 		for(int i=1; i<arr[0].length; i++) {
-			arr[0][i] = Integer.toString(i-1);
+			arr[0][i] = (i-1)+"";
+			//Integer.toString(i-1);
 		}
 		
 		for(int i=0; i<arr.length; i++) {
