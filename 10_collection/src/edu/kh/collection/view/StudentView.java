@@ -1,0 +1,199 @@
+package edu.kh.collection.view;
+
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+
+import edu.kh.collection.model.service.StudentService;
+import edu.kh.collection.model.vo.Student;
+
+// 입출력용 클래스
+public class StudentView {
+	
+	//멤버변수
+	private Scanner sc = new Scanner(System.in);
+	
+	private StudentService service = new StudentService();
+	
+	
+	public void displayMenu( ) {
+		
+		int input = 0;
+		
+		do {
+			
+			System.out.println("\n========== 학생 관리 프로그램 ==========\n");
+			System.out.println("1. 학생 정보 추가");
+			System.out.println("2. 학생 전체 조회");
+			System.out.println("3. 학생 정보 수정");
+			System.out.println("4. 학생 정보 제거");
+			System.out.println("5. 이름으로 검색(일치)");
+			System.out.println("6. 이름으로 검색(포함)");
+
+			System.out.println("0. 프로그램 종료");
+
+			try {
+
+				System.out.print("메뉴 선택 >> ");
+				input = sc.nextInt();
+				sc.nextLine();
+				System.out.println(); // 줄 바꿈
+				
+				
+				switch(input) {
+				case 1: addStudent(); break;
+				case 2: selectAll(); break;
+				case 3: updateStudent(); break;
+				case 4: removeStudent(); break;
+				case 5: break;
+				case 6: break;
+				case 0: System.out.println("프로그램 종료"); break;
+				default : System.out.println("잘못 입력하셨습니다. "); // 메뉴에 없는 숫자를 입력한 경우
+				}
+				
+				System.out.println();
+				
+				
+
+			} catch(InputMismatchException e) { // int형이 아닌 다른 값을 입력한 경우
+
+				System.out.println("[error] 입력 형식이 유효하지 않습니다. \n");
+				input = -1; // 첫 반복 시, 잘못 입력된 경우 while문이 종료되지 않게 만듦
+				sc.nextLine(); // 입력 버퍼에 남아있는 잘못된 문자열을 꺼내와 제거
+				
+				// 무한루프가 발생하는 이유 : 예외처리구문에 의해서, 버퍼에 입력했던 문자가 처리되지 않고 남아있게 됨 
+				// 그 문자가 다시 예외처리구문으로 넘어가고 무한루프에 빠지게 됨
+
+			}
+	         
+		} while (input !=0);
+		
+	}
+	
+	
+
+
+	/**
+	 *  1. 학생 정보 추가 메서드
+	 */
+	public void addStudent() {
+		
+		System.out.println("===== 학생 정보 추가 =====");
+		
+		System.out.print("이름 : ");
+		String name = sc.next();
+
+		System.out.print("나이 : ");
+		int age = sc.nextInt();
+		sc.nextLine(); // 입력 버퍼 개행 문자를 제거함
+		
+		System.out.print("주소 : ");
+		String address = sc.nextLine();
+		
+		char gender;
+		while(true) {
+			System.out.print("성별(M/F) : ");
+			gender = sc.next().toUpperCase().charAt(0);
+			// toUpperCase() : 문자열을 전부 대문자로 변환함
+			
+			// 유효성 검사 : 유효한 값을 입력했는지 검사
+			if(gender == 'M' || gender == 'F') {
+				break;
+			}
+			System.out.print("[error] M / F 만 입력해주세요. ");
+		}
+		
+		System.out.print("점수 : ");
+		int score = sc.nextInt();
+		
+		if( service.addStudent(name, age, address, gender, score)) {
+			System.out.println("[추가 완료]");
+		} else {
+			System.out.println("[error] 학생 정보 추가 실패");
+		}
+		
+		
+	}
+	
+	/**
+	 *  2. 학생 전체 조회
+	 */
+	public void selectAll() {
+		System.out.println("===== 학생 전체 조회 =====");
+		
+		List<Student> stdList = service.getStdList();
+		
+		System.out.println("------- for문 -------");
+		for(int i=0; i<stdList.size(); i++) {
+			System.out.println(stdList.get(i)/*.toString*/);
+		}
+		System.out.println("------- 향상된 for문 -------");
+		
+		// 향상된 for문 (foreach문)
+		// -배열 또는 컬렉션의 모든 요소를 처음부터 끝까지 순차접근할 때 사용하는 for문
+		// for(요소 하나를 꺼내서, 해당 요소를 참조할 변수 : 배열 또는 컬렉션)
+		//     Student 객체를 참조할 변수 s
+		
+		for(Student s : stdList) {
+			System.out.println(s);
+		}
+	}
+	
+	/**
+	 *  3. 학생 정보 수정
+	 */
+	public void updateStudent() {
+		
+		System.out.println("[학생 정보 수정]");
+		
+		System.out.print("인덱스 번호 : ");
+		int idx = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("수정할 주소 : ");
+		String address = sc.nextLine();
+
+		System.out.print("수정할 점수 : ");
+		int score = sc.nextInt();
+		
+		// 입력받은 값을 service로 전달하고
+		// 인덱스가 일치하는 학생 정보를 수정하면 "성공" 
+		// 인덱스가 일치하는 학생이 없으면 "실패(인덱스 불일치)" 출력 
+		
+		// 인덱스 번호를 확인하고 수정하기 위해서 서비스 메서드를 호출함
+		if(service.updatedStudent(idx, address, score)) {
+			System.out.println("성공");
+		} else {
+			System.out.println("실패(인덱스 불일치)");
+		}
+	}
+	
+	/**
+	 *  4. 학생 정보 제거
+	 */
+	public void removeStudent() {
+		System.out.println("[학생 정보 제거]");
+		
+		System.out.print("인덱스 번호 : ");
+		int idx = sc.nextInt();
+		sc.nextLine();
+		
+		Student s = service.removeStudent(idx);
+		// 리턴값을 Student 타입을 참조하는 참조변수 s에 저장
+		// 리턴값이 Student 타입이므로, 참조변수도 Student 타입이어야 함
+		
+		if(s == null) {
+			System.out.println("실패(인덱스 불일치)");
+		} else {
+			System.out.println(s.getName()+"학생의 정보가 삭제되었습니다.");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}
