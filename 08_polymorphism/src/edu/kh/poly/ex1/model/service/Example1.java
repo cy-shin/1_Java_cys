@@ -146,10 +146,10 @@ public class Example1 {
 		// -> 다운 캐스팅이 잘못된 경우 발생함
 		// instanceof연산자로 다운캐스팅할 타입이 맞는지 확인부터 하자
 		
-		if(c3 instanceof Truck) {
-			( (Truck)c3 ).loading();
+		if(c1 instanceof Truck) {
+			( (Truck)c1 ).loading();
 		} else {
-			System.out.println("c3는 트럭 객체가 아닙니다.");
+			System.out.println("c1는 트럭 객체가 아닙니다.");
 		}
 	}
 	
@@ -163,8 +163,13 @@ public class Example1 {
 		
 		
 		
-		
 		Car c = new Spark(); // 업캐스팅 상태
+//		Car c = new Spark(); // 업캐스팅 상태
+//		Car c = new Spark(); // 업캐스팅 상태
+		
+		((Spark)c).setDiscountOffer(0.5);
+		
+		check(c);
 		
 		if(c instanceof Car) {
 			// c가 참조하는 객체는 Spark이지만
