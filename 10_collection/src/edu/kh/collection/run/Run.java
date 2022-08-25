@@ -1,6 +1,7 @@
 package edu.kh.collection.run;
 
 import edu.kh.collection.model.service.ListService;
+import edu.kh.collection.model.service.SetService;
 import edu.kh.collection.view.StudentView;
 
 public class Run {
@@ -10,7 +11,13 @@ public class Run {
 		
 //		service1.ex1();
 		
-		new StudentView().displayMenu(); // 객체 1회성 사용 만들자마자 메서드만 호출하고 종료됨
+//		new StudentView().displayMenu(); // 객체 1회성 사용 만들자마자 메서드만 호출하고 종료됨
+		
+		SetService service2 = new SetService();
+		
+//		service2.ex1();
+//		service2.ex2();
+		service2.ex3();
 		
 	}
 }

@@ -15,7 +15,7 @@ public class StudentService {
 	public StudentService() {
 		stdList.add(new Student("남길동", 17, "서울시 강남구", 'M', 80));
 		stdList.add(new Student("중길동", 20, "서울시 중구" , 'F', 70));
-		stdList.add(new Student("북길동", 19, "서울시 강북구", 'M', 60));;
+		stdList.add(new Student("남길동", 19, "서울시 강북구", 'M', 60));;
 	}
 	/** stdList에 학생 정보 추가 메서드
 	 * @param name
@@ -99,4 +99,70 @@ public class StudentService {
 		
 		
 	}
+	
+	
+	/** 일치하는 이름 검색
+	 * @param name
+	 * @return resultList
+	 */
+	public List<Student> selectStudent1(String name) {
+
+		List<Student> resultList = new ArrayList<Student>();
+		
+		// 향상된 for문
+		for(Student s : stdList) {
+			if(s.getName().equals(name)) { // 입력한 이름(name)과 학생 이름(Student s.getName())
+				resultList.add(s);
+			}
+		}
+		
+		return resultList;
+	}
+	
+	
+	public List<Student> selectStudent2(String name) {
+		
+		List<Student> resultList = new ArrayList<Student>();
+
+		// 향상된 for문
+		for(Student s : stdList) {
+			
+			// 검색한 이름이 학생 이름에 포함되어 있는 경우
+			if(s.getName().contains(name)) {
+				// String.contains(값)
+				// - 문자열에 값이 포함되어 있으면 true
+				resultList.add(s);
+			}
+		}
+
+		return resultList;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

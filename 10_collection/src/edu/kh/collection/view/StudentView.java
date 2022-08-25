@@ -39,21 +39,18 @@ public class StudentView {
 				sc.nextLine();
 				System.out.println(); // 줄 바꿈
 				
-				
 				switch(input) {
 				case 1: addStudent(); break;
 				case 2: selectAll(); break;
 				case 3: updateStudent(); break;
 				case 4: removeStudent(); break;
-				case 5: break;
-				case 6: break;
+				case 5: selectStudent1(); break;
+				case 6: selectStudent2(); break;
 				case 0: System.out.println("프로그램 종료"); break;
 				default : System.out.println("잘못 입력하셨습니다. "); // 메뉴에 없는 숫자를 입력한 경우
 				}
 				
 				System.out.println();
-				
-				
 
 			} catch(InputMismatchException e) { // int형이 아닌 다른 값을 입력한 경우
 
@@ -70,7 +67,12 @@ public class StudentView {
 		
 	}
 	
-	
+
+
+
+
+
+
 
 
 	/**
@@ -189,9 +191,50 @@ public class StudentView {
 		}
 	}
 	
+	/**
+	 *  5. 이름으로 검색(일치)
+	 */
+	public void selectStudent1() {
+		System.out.println("[이름으로 검색(일치)]");
+		System.out.print("검색할 이름을 입력하세요 >>");
+		String name = sc.next();
+		
+		List<Student> resultList = service.selectStudent1(name);
+		
+		// resultList
+		
+		if(resultList.isEmpty()) {
+			// resultList.isEmpty() 리스트에 저장된 요소가 없으면 true
+			// resultList.size() == 0
+			System.out.println("검색 결과가 없습니다.");
+		} else {
+			for(Student s : resultList) {
+				System.out.println(s);
+			}
+		}
+	}
 	
-	
-	
+	/**
+	 *  6. 이름으로 검색(포함)
+	 */
+	public void selectStudent2() {
+		System.out.println("[이름으로 검색(포함)]");
+		System.out.print("검색할 이름을 입력하세요 >>");
+		String name = sc.next();
+
+		List<Student> resultList = service.selectStudent2(name);
+
+		// resultList
+		if(resultList.isEmpty()) {
+			// resultList.isEmpty() 리스트에 저장된 요소가 없으면 true
+			// resultList.size() == 0
+			System.out.println("검색 결과가 없습니다.");
+		} else {
+			for(Student s : resultList) {
+				System.out.println(s);
+			}
+		}
+	}
 	
 	
 	
