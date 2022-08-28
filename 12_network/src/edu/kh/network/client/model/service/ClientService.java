@@ -60,6 +60,8 @@ public class ClientService {
 
 				pw.println(str); // 메세지를 서버 쪽으로 출력
 				pw.flush(); // 스트림 내용 밀어내기
+				
+				
 			}
 			
 		} catch (IOException e) {

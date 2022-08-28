@@ -107,4 +107,68 @@ public class ServerService {
 		
 		
 	}
+
+	public void service2() {
+		// 멤버변수 선언
+		
+		// 포트번호
+		int port = 7878;
+		
+		// 소켓 변수
+		ServerSocket serverSocket = null;
+		Socket clientSocket = null;
+		
+		// 기반스트림 변수
+		InputStream is = null;
+		OutputStream os = null;
+		
+		// 보조스트림 변수
+		BufferedReader br = null;
+		PrintWriter pw = null;
+		
+		try {
+			
+			// 클라이언트와 소켓을 연결함
+			System.out.println("[서버]");
+			serverSocket = new ServerSocket(port);
+			
+			System.out.println("클라이언트와의 연결을 기다리고 있습니다...");
+			clientSocket = serverSocket.accept();
+			System.out.println("[클라이언트 연결 성공]");
+			
+			is = clientSocket.getInputStream();
+			os = clientSocket.getOutputStream();
+			
+			// 보조 스트림 설정
+			br = new BufferedReader(new InputStreamReader(is));
+			pw = new PrintWriter(os);
+			
+			// 클라이언트로 날짜 출력
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
+			String str = sdf.format(now);
+			
+			pw.println(str);
+			pw.flush();
+			
+			// 클라이언트의 채팅 받아옴
+			String message = br.readLine();
+			System.out.println(message);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(br != null) br.close();
+				if(pw != null) pw.close();
+				if(serverSocket != null) serverSocket.close();
+				if(clientSocket != null) clientSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
+
+	}
+
 }

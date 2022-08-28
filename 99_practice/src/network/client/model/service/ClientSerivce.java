@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -79,5 +80,66 @@ public class ClientSerivce {
 				}
 		}
 		
+	}
+
+	public void service2() {
+		
+		// 아이피 및 포트번호 설정
+		String IP = "127.0.0.1";
+		int port = 7878;
+		
+		
+		// 변수 선언
+		Socket clientSocket = null;
+		
+		// 스트림 선언
+		InputStream is = null;
+		OutputStream os = null;
+		
+		// 보조 스트림 선언
+		BufferedReader br = null;
+		PrintWriter pw = null;
+		
+		try {
+			// 소켓 연결
+			System.out.println("[클라이언트]");
+			clientSocket = new Socket(IP, port);
+			if(clientSocket != null) {
+				System.out.println("[서버 연결 성공]");
+				
+				// 메인 스트림 연결
+				is = clientSocket.getInputStream();
+				os = clientSocket.getOutputStream();
+				
+				// 보조스트림 사용
+				br = new BufferedReader(new InputStreamReader(is));
+				pw = new PrintWriter(os);
+				
+				// 서버에서 받아온 값 출력
+				System.out.println(br.readLine());
+				
+				// 서버로 메세지 전송
+				Scanner sc = new Scanner(System.in);
+				
+				System.out.println("메세지 입력 : ");
+				String message = sc.nextLine();
+				
+				pw.println(message);
+				pw.flush();
+				System.out.println("메세지가 전송되었습니다.");
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(br != null) br.close();
+				if(pw != null) pw.close();
+				if(clientSocket != null) clientSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
