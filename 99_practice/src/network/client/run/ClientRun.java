@@ -12,7 +12,7 @@ public class ClientRun {
 		
 		ClientService2 client2 = new ClientService2();
 		
-		client2.service();
-		
+//		client2.service();
+		client2.clientS();
 	}
 }

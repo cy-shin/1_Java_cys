@@ -12,6 +12,7 @@ public class ServerRun {
 		
 		ServerService2 server2 = new ServerService2();
 		
-		server2.service();
+//		server2.service();
+		server2.serverS();
 	}
 }

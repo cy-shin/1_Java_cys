@@ -81,4 +81,65 @@ public class ServerService2 {
 		
 		
 	}
+
+	public void serverS() {
+		
+		// 멤버변수 선언
+		
+		// 포트번호를 저장할 port변수 선언
+		int port = 8280;
+		
+		// 소켓 변수 선언
+		ServerSocket serverSocket = null;
+		Socket clientSocket = null;
+		// 기반 스트림 선언
+		InputStream is = null;
+		OutputStream os = null;
+		// 보조 스트림 선언
+		BufferedReader br = null;
+		PrintWriter pw = null;
+		
+		try {
+			// 소켓 연결
+			System.out.println("[Server]");
+			System.out.println("클라이언트의 요청을 기다리고 있습니다...");
+			serverSocket = new ServerSocket(port);
+			clientSocket = serverSocket.accept();
+			System.out.println("[System] : 연결 성공");
+			// 스트림 연결
+			is = clientSocket.getInputStream();
+			os = clientSocket.getOutputStream();
+			// 보조 스트림 설정
+			br = new BufferedReader( new InputStreamReader(is));
+			pw = new PrintWriter(os);
+			// 스트림을 이용해 출력
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
+			String serverMessage = sdf.format(now);
+			pw.println("현재 시각 : " + serverMessage);
+			pw.flush();
+			// 스트림을 이용해 입력받음
+			String clientMessage = br.readLine();
+			String clientIP = clientSocket.getInetAddress().getHostAddress();
+			System.out.println("클라이언트("+clientIP+") : "+clientMessage);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// 종료
+				try {
+					if(br!=null) br.close();
+					if(pw!=null) pw.close();
+					if(serverSocket!=null) serverSocket.close();
+					if(clientSocket!=null) clientSocket.close();
+					System.out.println("[System] : 연결 해제");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+		
+		
+		
+	}
 }
