@@ -59,7 +59,7 @@ public class MapService {
 		Map<String, Object> student = new HashMap<String, Object>();
 		
 		// 값 추가
-		std.setName("홍길동"); // vo
+//		std.setName("홍길동/"); // vo
 		student.put("name", "홍길동");
 
 		std.setAge(15);
@@ -75,6 +75,7 @@ public class MapService {
 		student.put("score", 100);
 		
 		System.out.println(std);
+		System.out.println("------------------------");
 		System.out.println(student);
 		
 		System.out.println("---------- 한 줄씩 출력 ----------");

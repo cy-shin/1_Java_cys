@@ -17,6 +17,6 @@ public class ClientRun {
 //		client2.clientS();
 		
 		ClientService3 client3 = new ClientService3();
-		client3.client();
+		client3.client();		
 	}
 }
