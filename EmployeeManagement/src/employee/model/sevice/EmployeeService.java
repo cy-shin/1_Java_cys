@@ -14,14 +14,15 @@ public class EmployeeService {
 	
 	
 	public EmployeeService() {
-		list.add(0, new Employee(1, "홍길동", "000000-0000000", "redroadonecoin", "000-0000-0000", "재무", "대리", 3300000));
-		list.add(1, new Employee(2, "홍길동", "111111-1111111", "redroadonecoin", "111-1111-1111", "인사", "과장", 6000000));
-		list.add(2, new Employee(3, "김둘리", "222222-2222222", "redroadonecoin", "222-2222-2222", "인사", "사원", 2700000));
-		list.add(3, new Employee(4, "이도우너", "333333-3333333", "redroadonecoin", "333-3333-3333", "인사", "대리", 3000000));
-		list.add(4, new Employee(5, "박또치", "123456-1234567", "redroadonecoin", "123-1234-1234", "인사", "대리", 3000000));
+		list.add(0, new Employee(1, "홍길동", "700101-1******", "redroadcoin@", "000-0000-0000", "재무", "부장", 6000000));
+		list.add(1, new Employee(2, "일지매", "750202-1******", "journalhawk@", "111-1111-1111", "인사", "부장", 6300000));
+		list.add(2, new Employee(3, "임꺽정", "800303-2******", "nnervous@", "222-2222-2222", "홍보", "차장", 5100000));
+		list.add(3, new Employee(4, "김흥부", "900404-2******", "heungboo@", "333-3333-3333", "기획", "부장", 6500000));
+		list.add(4, new Employee(5, "이놀부", "930505-1******", "greedy@", "555-5555-5555", "재무", "대리", 3300000));
+		list.add(5, new Employee(6, "박까치", "960707-2******", "ilikegourd@", "777-7777-7777", "인사", "대리", 3400000));
+		list.add(6, new Employee(7, "최뱁새", "000808-3******", "veryfast@", "888-8888-8888", "인사", "사원", 2300000));
+		list.add(7, new Employee(8, "정황새", "011010-4******", "conditions@", "999-9999-9999", "기획", "주임", 2800000));
 	}
-
-	
 
 	
 	
@@ -36,11 +37,18 @@ public class EmployeeService {
 	 * @return
 	 */
 	public int addEmployee(String empName, String empNo, String email, String phone, String departmentTitle, String jobName, int salary) {
-		int idx = list.size() - 1;
-		int empId = idx + 1;
-		list.add(idx, new Employee(empId, empName, empNo, email, phone, departmentTitle, jobName, salary));
-		return 1;
+		// 주민번호 가리기
+		String empNoHide = "";
+		for(int i=0; i<empNo.length(); i++) {
+			if(i<8) empNoHide += empNo.charAt(i);
+			if(i>=8) empNoHide += "*";
+		}
 		
+		int idx = list.size();
+		int empId = idx + 1;
+		
+		list.add(idx, new Employee(empId, empName, empNoHide, email, phone, departmentTitle, jobName, salary));
+		return 1;		
 	}
 	
 	
@@ -64,14 +72,14 @@ public class EmployeeService {
 	
 	
 	/** 3. 사번으로 조회
-	 * @param input
+	 * @param inputId
 	 * @return
 	 */
-	public Employee[] empIdSelect(int input) {
+	public Employee[] empIdSelect(int inputId) {
 		Employee[] resultArr = new Employee[list.size()];
 		int resultIdx = 0;
 		for(int i=0; i<list.size(); i++) {
-			if(list.get(i).getEmpId()==input) {
+			if(list.get(i).getEmpId()==inputId) {
 				resultArr[resultIdx++] = new Employee(list.get(i).getEmpId(),
 					    list.get(i).getEmpName(),
 					    list.get(i).getEmpNo(),
@@ -88,17 +96,26 @@ public class EmployeeService {
 	}
 	
 	
-	public String employeeUpdate(int tmpId, String email, String phone, String departmentTitle, String jobName, int salary) {
-		if(!(email.equals("0"))) list.get(tmpId).setEmail(email);
-		if(!(phone.equals("0"))) list.get(tmpId).setPhone(phone);
-		if(!(departmentTitle.equals("0"))) list.get(tmpId).setDepartmentTitle(departmentTitle);
-		if(!(jobName.equals("0"))) list.get(tmpId).setJobName(jobName);
-		if(!(salary==0)) list.get(tmpId).setSalary(salary);
-		return list.get(tmpId).getEmpName();
+	/** 4. 사번을 검색해서 정보 수정
+	 * @param inputId 입력한 사번
+	 * @param email
+	 * @param phone
+	 * @param departmentTitle
+	 * @param jobName
+	 * @param salary
+	 * @return 사번에 해당하는 이름
+	 */
+	public String employeeUpdate(int inputId, String email, String phone, String departmentTitle, String jobName, int salary) {
+		if(!(email.equals("0"))) list.get(inputId).setEmail(email);
+		if(!(phone.equals("0"))) list.get(inputId).setPhone(phone);
+		if(!(departmentTitle.equals("0"))) list.get(inputId).setDepartmentTitle(departmentTitle);
+		if(!(jobName.equals("0"))) list.get(inputId).setJobName(jobName);
+		if(!(salary==0)) list.get(inputId).setSalary(salary);
+		return list.get(inputId).getEmpName();
 	}
 	
 	/** 5. 사번을 검색해서 삭제
-	 * @param tmpid : 입력한 사번
+	 * @param inputid : 입력한 사번
 	 * @param input : 
 	 *  N : 삭제 안함
 	 *  Y : 삭제 
@@ -106,27 +123,21 @@ public class EmployeeService {
 	 * -1 : 삭제 안함
 	 *  그외 : 삭제
 	 */
-	public int employeeDelete(int tmpId, String input) {
-		// tmpId : 입력한 사번
-		// deleteIdx : 
-		// 입력한 사번을 for문을 이용해 리스트에서 검색
-		// 해당 사번의 인덱스 값을 가져옴
-		
+	public int employeeDelete(int inputId, String agree) {
 		int deleteIdx = -1;
 		
-		if(input.toUpperCase().equals("Y")) {
+		if(agree.toUpperCase().equals("Y")) {
 			for(int i=0; i<list.size(); i++) {
-				if(list.get(i).getEmpId() == tmpId) {
+				if(list.get(i).getEmpId() == inputId) {
 					deleteIdx = i;
 					list.remove(deleteIdx);
 					break;
 				}
 			}
 		}
-		if (input.toUpperCase().equals("N")) {
+		if (agree.toUpperCase().equals("N")) {
 			deleteIdx = -1;
 		}
-		
 		return deleteIdx;
 		
 	}
@@ -179,43 +190,32 @@ public class EmployeeService {
 	}
 
 
+	/** 8. 부서별 급여 합 전체 조회
+	 * @return 부서 및 부서별 급여 총계가 적힌 Map
+	 */
 	public Map<String, Integer> salarySum() {
 		Map<String, Integer> departMap = new HashMap<>();
+		// 1. 리스트에 적힌 부서를 map에 저장
+		// 2. 리스트에서 부서를 확인하고, map의 키와 같으면 map의 키에 해당하는 값에 더함
 		
-		// 부서 중복 제거
+		// 리스트에 적힌 부서를 map의 key 부분에 저장하고 value는 0으로 초기화함
 		for(int i=0; i<list.size(); i++) {
 			departMap.put((list.get(i).getDepartmentTitle()), 0);
 		}
 		
-
-		for(int i=0; i<list.size(); i++) {
-			for(int j=0; j<departMap.size(); j++) {
-				departMap.get(i);
-				
+		for(int i=0; i<list.size(); i++) { // 리스트에 순차접근
+			for(String s : departMap.keySet()) { // 맵에 순차접근
+				if(s.equals(list.get(i).getDepartmentTitle())) { // 만약 맵의 key(부서명)과 리스트의 부서명이 같으면
+					departMap.put(s, departMap.get(s) + list.get(i).getSalary());
+					// departMap의 현재 키(s)에 해당하는 값(현재 map에 저장된 salary)를 불러와 리스트에 저장된 샐러리를 더해 누적한다.
+					// put 메서드를 이용해, 현재 키에 해당하는 값(샐러리)을 앞서 계산해 얻은 누적 샐러리로 덮어쓴다
+				}
 			}
-
 		}
 		// 부서 값 찾아서 sum만들기
 		
 		return departMap;
 		
 	}
-	
-	
-	
-	
-//	public Employee[] listGet(int resultIdx) {
-//		Employee[] tempArr = new Employee[list.size()];
-//		tempArr[resultIdx] = new Employee(list.get(resultIdx).getEmpId(),
-//			    							  list.get(resultIdx).getEmpName(),
-//			    							  list.get(resultIdx).getEmpNo(),
-//			    							  list.get(resultIdx).getEmail(),
-//			    							  list.get(resultIdx).getPhone(),
-//			    							  list.get(resultIdx).getDepartmentTitle(),
-//			    							  list.get(resultIdx).getJobName(),
-//			    							  list.get(resultIdx).getSalary());
-//		return tempArr;
-//	}
-
 	
 }

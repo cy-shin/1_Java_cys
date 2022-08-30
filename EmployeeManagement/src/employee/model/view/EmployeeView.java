@@ -9,7 +9,8 @@ import employee.model.vo.Employee;
 public class EmployeeView {
 	private EmployeeService service = new EmployeeService(); // 출력용 객체
 	private Employee[] resultArr; // 출력용 객체
-	private int tmpId = -1; // 임시 사번
+	private int inputId = -1; // 임시 사번
+	
 	private Scanner sc = new Scanner(System.in);
 	
 
@@ -18,6 +19,7 @@ public class EmployeeView {
 		int input = 0;
 		do {
 			resultArr = null;
+			inputId = -1;
 			
 			System.out.println("----------- 사원 관리 프로그램 -----------");
 			System.out.println("1. 새로운 사원 정보 추가");
@@ -36,20 +38,18 @@ public class EmployeeView {
 			
 			switch(input) {
 			case 1: addEmployee(); break;
-			case 2: selectAll(); resultArrPrint(); break;
-			case 3: employeeSelectIntro(); employeeSelect(); resultArrPrint(); break;
-			case 4: employeeSelect();  resultArrPrint(); employeeUpdate(); break;
-			case 5: employeeSelect();  resultArrPrint(); employeeDelete(); break;
-			case 6: selectTitle(); resultArrPrint(); break;
-			case 7: selectSalaryUp(); resultArrPrint(); break;
+			case 2: selectAll(); break;
+			case 3: employeeSelect(); break;
+			case 4: employeeUpdate(); break;
+			case 5: employeeDelete(); break;
+			case 6: selectTitle(); break;
+			case 7: selectSalaryUp(); break;
 			case 8: salarySum(); break;
 			case 0: System.out.println("프로그램을 종료합니다. "); break;
 			default: System.out.println("잘못된 입력입니다. ");
 				
 			}
-			
 		} while(input!=0);
-		
 	}
 		
 	/**
@@ -91,13 +91,18 @@ public class EmployeeView {
 	public void selectAll() {
 		System.out.println("[전체 사원 정보 조회]");
 		resultArr = service.viewAll();
+		
+		 resultArrPrint();
 	}
 	
 	/**
 	 * 3. 사번이 일치하는 사원 정보 조회
 	 */
-	public void employeeSelectIntro() {
+	public void employeeSelect() {
 		System.out.println("[사번이 일치하는 사원 정보 조회]");
+		
+		empIdSelect();
+		resultArrPrint(); 
 		
 	}
 	
@@ -105,6 +110,9 @@ public class EmployeeView {
 	 *  4. 사번이 일치하는 사원 수정
 	 */
 	public void employeeUpdate() {
+		empIdSelect();
+		resultArrPrint();
+		
 		if(resultArr!=null) {
 			System.out.println("[사번이 일치하는 사원 정보 수정]");
 			System.out.println("수정을 원하지 않는 항목이 있는 경우 0 입력");
@@ -120,8 +128,8 @@ public class EmployeeView {
 			int salary = sc.nextInt();
 			sc.nextLine();
 			
-			String result = service.employeeUpdate(tmpId, email, phone, departmentTitle, jobName, salary);
-			System.out.println(result + " 사원의 정보가 수정되었습니다.");
+			String result = service.employeeUpdate(inputId, email, phone, departmentTitle, jobName, salary);
+			System.out.println(result + " 사원의 정보가 업데이트되었습니다.");
 		}
 		if(resultArr==null) System.out.println("사번을 확인해주세요");
 	}
@@ -130,12 +138,14 @@ public class EmployeeView {
 	 *  5. 사번을 검색해서 삭제 -> B
 	 */
 	public void employeeDelete() {
+		empIdSelect();
+		
 		String input = "";
 		if(resultArr!=null) {
 			
 			System.out.print("경고 : 해당 사원의 정보를 삭제하시겠습니까? ( Y / N ) : ");
 			input = sc.next();
-			int result = service.employeeDelete(tmpId, input);
+			int result = service.employeeDelete(inputId, input);
 			
 			if(result==-1) {
 				System.out.println("사원 정보 삭제가 취소되었습니다.");
@@ -155,12 +165,15 @@ public class EmployeeView {
 		input = sc.nextLine();
 		
 		resultArr = service.selectTitle(input);
+		
+		resultArrPrint();
 	}
 	
 	/**
 	 *  7. 입력 받은 급여 이상을 받는 모든 사원 정보 조회
 	 */
 	public void selectSalaryUp() {
+		
 		int input = 0;
 		System.out.println("[입력 받은 급여 이상을 받는 모든 사원 정보 조회]");
 		System.out.print("급여(원) :  ");
@@ -168,6 +181,8 @@ public class EmployeeView {
 		sc.nextLine();
 		
 		resultArr = service.selectSalaryUp(input);
+		
+		resultArrPrint();
 	}
 	
 	/**
@@ -213,13 +228,20 @@ public class EmployeeView {
  	/**
 	 *  B. 사번을 검색해서 값 받아오기
 	 */
-	public void employeeSelect() {
-		int input = 0;
+	public void empIdSelect() {
 		System.out.print("사번 :  ");
-		input = sc.nextInt();
+		inputId = sc.nextInt();
 		sc.nextLine();
-		tmpId = input;
 		
-		resultArr = service.empIdSelect(input);
+		resultArr = service.empIdSelect(inputId);
 	}
+//	public void empIdSelect() {
+//		int input = 0;
+//		System.out.print("사번 :  ");
+//		input = sc.nextInt();
+//		sc.nextLine();
+//		inputId = input;
+//		
+//		resultArr = service.empIdSelect(input);
+//	}
 }
