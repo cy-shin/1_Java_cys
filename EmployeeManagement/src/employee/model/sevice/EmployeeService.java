@@ -98,8 +98,8 @@ public class EmployeeService {
 	}
 	
 	/** 5. 사번을 검색해서 삭제
-	 * @param tmpid : 사번
-	 * @param input 
+	 * @param tmpid : 입력한 사번
+	 * @param input : 
 	 *  N : 삭제 안함
 	 *  Y : 삭제 
 	 * @return 
@@ -107,6 +107,11 @@ public class EmployeeService {
 	 *  그외 : 삭제
 	 */
 	public int employeeDelete(int tmpId, String input) {
+		// tmpId : 입력한 사번
+		// deleteIdx : 
+		// 입력한 사번을 for문을 이용해 리스트에서 검색
+		// 해당 사번의 인덱스 값을 가져옴
+		
 		int deleteIdx = -1;
 		
 		if(input.toUpperCase().equals("Y")) {
@@ -179,7 +184,16 @@ public class EmployeeService {
 		
 		// 부서 중복 제거
 		for(int i=0; i<list.size(); i++) {
-				departMap.put((list.get(i).getDepartmentTitle()), 0);
+			departMap.put((list.get(i).getDepartmentTitle()), 0);
+		}
+		
+
+		for(int i=0; i<list.size(); i++) {
+			for(int j=0; j<departMap.size(); j++) {
+				departMap.get(i);
+				
+			}
+
 		}
 		// 부서 값 찾아서 sum만들기
 		
