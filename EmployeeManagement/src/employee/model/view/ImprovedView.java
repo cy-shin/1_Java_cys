@@ -2,7 +2,10 @@ package employee.model.view;
 
 import java.util.Scanner;
 
+import employee.model.sevice.ImprovedService;
+
 public class ImprovedView {
+	ImprovedService service = new ImprovedService();
 	Scanner sc = new Scanner(System.in);
 	
 	public void displayMenu() {
@@ -24,7 +27,7 @@ public class ImprovedView {
 			sc.nextLine();
 			
 			switch(input) {
-			case 1: break;
+			case 1: tmp(); break;
 			case 2: break;
 			case 3: break;
 			case 4: break;
@@ -39,6 +42,9 @@ public class ImprovedView {
 		} while(input!=0);
 	}
 	
+	public void tmp() {
+		service.forPrint(service.returnList());
+	}
 	/**
 	 *  A. 공용 출력 메서드
 	 */

@@ -1,10 +1,11 @@
 package employee.run;
 
-import employee.model.sevice.ImprovedService;
+import employee.model.view.ImprovedView;
 
 public class ImprovedRun {
 	public static void main(String[] args) {
-		ImprovedService iService = new ImprovedService();
+		ImprovedView view = new ImprovedView();
 		
+		view.displayMenu();
 	}
 }
