@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import employee.model.vo.Employee;
 import employee.model.vo.OM;
 
 public class OMService {
@@ -16,10 +17,14 @@ public class OMService {
 	public OMService() {
 		// int empId, String empName, String empNo, String email,
 		// String phone, String departmentTitle, String jobName, int salary
-		list.add(0, new OM(1,"일길동","123456-1234567", "hgd1@", "00000000000", "인사부", "부장", 7200000));
-		list.add(1, new OM(2,"이길동","123456-1234567", "hgd2@", "00000000000", "영업부", "부장", 7200000));
-		list.add(2, new OM(3,"삼길동","123456-1234567", "hgd3@", "00000000000", "총무부", "부장", 7200000));
-		list.add(3, new OM(4,"사길동","123456-1234567", "hgd4@", "00000000000", "총무부", "시원", 2700000));
+		list.add(0, new OM(1, "홍길동", "700101-1******", "redroadcoin@", "000-0000-0000", "재무", "부장", 6000000));
+		list.add(1, new OM(2, "일지매", "750202-1******", "journalhawk@", "111-1111-1111", "인사", "부장", 6300000));
+		list.add(2, new OM(3, "임꺽정", "800303-2******", "nnervous@", "222-2222-2222", "홍보", "차장", 5100000));
+		list.add(3, new OM(4, "김흥부", "900404-2******", "heungboo@", "333-3333-3333", "기획", "부장", 6500000));
+		list.add(4, new OM(5, "이놀부", "930505-1******", "greedy@", "555-5555-5555", "재무", "대리", 3300000));
+		list.add(5, new OM(6, "박까치", "960707-2******", "ilikegourd@", "777-7777-7777", "인사", "대리", 3400000));
+		list.add(6, new OM(7, "최뱁새", "000808-3******", "veryfast@", "888-8888-8888", "인사", "사원", 2300000));
+		list.add(7, new OM(8, "정황새", "011010-4******", "conditions@", "999-9999-9999", "기획", "주임", 2800000));
 	}
 
 	/** 1. 새로운 사원 정보 추가
@@ -39,9 +44,8 @@ public class OMService {
 			if(i<8) empNoHide += empNo.charAt(i);
 		}
 		list.add(new OM(empId, empName, empNoHide, email, phone, departmentTitle, jobName, salary));
-		
-		
 	}
+	
 	/** 2. 전체 사원 정보 조회
 	 * @return 전체 리스트
 	 */
@@ -66,32 +70,39 @@ public class OMService {
 	}
 	
 	
-	public int updateById(String agree, int inputId, String email, String phone, String departmentTitle, String jobName, int salary) {
-		boolean flag = false;
-		
-		if(flag) return 0;
-		return -1;
+	/** 4. 사번이 일치하는 사원 정보 수정
+	 * @param agree
+	 * @param inputId
+	 * @param email
+	 * @param phone
+	 * @param departmentTitle
+	 * @param jobName
+	 * @param salary
+	 * @return
+	 */
+	public void updateById(int inputId, String email, String phone, String departmentTitle, String jobName, int salary) {
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getEmpId()==inputId) {
+				if(!(email.equals("0"))) list.get(i).setEmail(email);
+				if(!(phone.equals("0"))) list.get(i).setPhone(phone);
+				if(!(departmentTitle.equals("0"))) list.get(i).setDepartmentTitle(departmentTitle);
+				if(!(jobName.equals("0"))) list.get(i).setJobName(jobName);
+				if(salary != 0) list.get(i).setSalary(salary);
+			}
+		}
 	}
 	
 	/** 5. 사번이 일치하는 사원 정보 삭제
-	 * @param agree
 	 * @param inputId
 	 * @return 
-	 *  0 : 삭제 완료
-	 * -1 : 삭제 취소
 	 */
-	public int deleteById(String agree, int inputId) {
-		boolean flag = false;
-		if(agree.toUpperCase()=="Y") {
-			for(int i=0; i<list.size(); i++) {
-				if(list.get(i).getEmpId()==inputId) {
-					list.remove(i);
-					flag = true;
-				}
+	public void deleteById(int inputId) {
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getEmpId()==inputId) {
+				list.remove(i);
 			}
+			
 		}
-		if(flag) return 0;
-		return -1;
 	}
 	
 	/** 6. 입력 받은 부서와 일치 모든 사원 정보 조회

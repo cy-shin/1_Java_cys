@@ -36,14 +36,13 @@ public class OMView {
 			case 1: registration(); break;
 			case 2: selectAll(); break;
 			case 3: selectById(); break;
-			case 4: break;
-			case 5: break;
+			case 4: updateById(); break;
+			case 5: deleteById(); break;
 			case 6: selectByTitle(); break;
 			case 7: selectBySalary(); break;
 			case 8: titleSalary(); break;
 			case 0: System.out.println("프로그램을 종료합니다. "); break;
 			default: System.out.println("잘못된 입력입니다. ");
-				
 			}
 		} while(input!=0);
 	}
@@ -106,57 +105,59 @@ public class OMView {
 	public void updateById() {
 		System.out.println("[사번이 일치하는 사원 정보 수정]");
 		int inputId = forSelect();
-		
+		int agree = -1;
 		if(inputId!=-1) {
 			forPrint(service.selecyById(inputId));
 			System.out.printf("정말로 해당 사원의 정보를 수정하겠습니까?(Y/N)");
-			String agree = sc.nextLine();
-			
+			String tmp = sc.nextLine();
+			if (tmp.toUpperCase().equals("Y")) agree = 1;
+			if (tmp.toUpperCase().equals("N")) agree = 0;
+		} 
+		if(agree == 1) {
+			System.out.println("수정을 원하지 않는 항목에는 0 입력");
 			System.out.print("이메일 : ");
 			String email = sc.next();
-			
+
 			System.out.print("전화번호 : ");
 			String phone = sc.next();
-			
+
 			System.out.print("부서 : ");
 			String departmentTitle = sc.next();
-			
+
 			System.out.print("직급 : ");
 			String jobName = sc.next();
-			
+
 			System.out.print("급여 : ");
 			int salary = sc.nextInt();
 			sc.nextLine();
-			
-			int result = updateById(agree, inputId, email, phone, departmentTitle, jobName, salary);
-			
-			if(result == 0) System.out.println("정보가 수정되었습니다.");
-			if(result == -1) System.out.println("작업이 취소되었습니다.");
-			
-		} else {
-			System.out.println("사번이 일치하는 사원을 찾을 수 없습니다. ");
+
+			service.updateById(inputId, email, phone, departmentTitle, jobName, salary);
+
+			System.out.println("정보가 수정되었습니다.");
 		}
+		if(agree == 0) System.out.println("작업이 취소되었습니다.");
+		if(agree == -1) System.out.println("사번이 일치하는 사원을 찾을 수 없습니다. ");		
 	}
-	
 	/**
 	 *  5. 사번이 일치하는 사원 정보 삭제
 	 */
 	public void deleteById() {
 		System.out.println("[사번이 일치하는 사원 정보 삭제]");
 		int inputId = forSelect();
-		
+		int agree = -1;
 		if(inputId!=-1) {
 			forPrint(service.selecyById(inputId));
 			System.out.printf("정말로 해당 사원의 정보를 삭제하겠습니까?(Y/N)");
-			String agree = sc.nextLine();
-			int result = service.deleteById(agree, inputId);
-			
-			if(result == 0) System.out.println("정보가 삭제되었습니다.");
-			if(result == -1) System.out.println("작업이 취소되었습니다.");
-			
-		} else {
-			System.out.println("사번이 일치하는 사원을 찾을 수 없습니다. ");
+			String tmp = sc.nextLine();
+			if (tmp.toUpperCase().equals("Y")) agree = 1;
+			if (tmp.toUpperCase().equals("N")) agree = 0;
+		} 
+		if(agree == 1) {
+			service.deleteById(inputId);
+			System.out.println("정보가 삭제되었습니다.");
 		}
+		if(agree == 0) System.out.println("작업이 취소되었습니다.");
+		if(agree == -1) System.out.println("사번이 일치하는 사원을 찾을 수 없습니다. ");
 	}
 	
 	/**
@@ -198,8 +199,6 @@ public class OMView {
 		}
 	}
 	
-	
-	
 	/**
 	 *  출력용 메서드
 	 * @param resultList 
@@ -219,21 +218,16 @@ public class OMView {
 					om.getSalary());
 		}	
 	}
-	
-	
 	/**
 	 *  조회용 메서드
 	 */
 	public int forSelect() {
 		int inputId = 0;
-		System.out.println("사번 입력 : ");
+		System.out.print("사번 입력 : ");
 		inputId = sc.nextInt();
 		sc.nextLine();
-		
-		inputId = service.selecyById(inputId).get(0).getEmpId();
-		
+		if(service.selecyById(inputId).isEmpty()) inputId = -1;
+			
 		return inputId;
 	}
-	
-	
 }
