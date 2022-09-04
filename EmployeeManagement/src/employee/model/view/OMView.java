@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import employee.model.sevice.OMService;
 import employee.model.vo.OM;
 
@@ -46,7 +44,6 @@ public class OMView {
 			}
 		} while(input!=0);
 	}
-	
 	
 	/**
 	 *  1. 새로운 사원 정보 추가
@@ -205,7 +202,15 @@ public class OMView {
 	 */
 	public void forPrint(List<OM> resultList) {
 		List<OM> printList = resultList;
-		System.out.printf("%-3s|%-10s|%-15s|%-19s|%-19s|%-16s|%-9s|%-9s\n","사번","이름","주민번호","이메일","전화번호","부서","직급","급여");
+		System.out.printf("%-3s|%-10s|%-15s|%-19s|%-19s|%-16s|%-9s|%-9s\n",
+					"사번",
+					"이름",
+					"주민번호",
+					"이메일",
+					"전화번호",
+					"부서",
+					"직급",
+					"급여");
 		for(OM om : printList) {
 			System.out.printf("%-3d %-11s %-15s %-20s  %-20s %-17s%-10s%-10d\n",
 					om.getEmpId(),
@@ -218,8 +223,11 @@ public class OMView {
 					om.getSalary());
 		}	
 	}
+	
 	/**
 	 *  조회용 메서드
+	 *  @return 입력한 사번을 반환
+	 *   -1 : 사번을 찾을 수 없는 경우
 	 */
 	public int forSelect() {
 		int inputId = 0;

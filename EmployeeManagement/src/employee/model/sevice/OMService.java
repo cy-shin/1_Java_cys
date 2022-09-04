@@ -25,7 +25,7 @@ public class OMService {
 		list.add(5, new OM(6, "박까치", "960707-2******", "ilikegourd@", "777-7777-7777", "인사", "대리", 3400000));
 		list.add(6, new OM(7, "최뱁새", "000808-3******", "veryfast@", "888-8888-8888", "인사", "사원", 2300000));
 		list.add(7, new OM(8, "정황새", "011010-4******", "conditions@", "999-9999-9999", "기획", "주임", 2800000));
-	}
+	} 
 
 	/** 1. 새로운 사원 정보 추가
 	 * @param empName
@@ -44,7 +44,7 @@ public class OMService {
 			if(i<8) empNoHide += empNo.charAt(i);
 		}
 		list.add(new OM(empId, empName, empNoHide, email, phone, departmentTitle, jobName, salary));
-	}
+	} // end registration
 	
 	/** 2. 전체 사원 정보 조회
 	 * @return 전체 리스트
@@ -52,7 +52,7 @@ public class OMService {
 	public List selectAll() {
 		List<OM> resultList = list;
 		return resultList;
-	}
+	} // end selectAll
 
 	
 	/** 3. 사번이 일치하는 사원 정보 조회
@@ -67,7 +67,7 @@ public class OMService {
 			}
 		}
 		return resultList;
-	}
+	} // end selectById
 	
 	
 	/** 4. 사번이 일치하는 사원 정보 수정
@@ -78,7 +78,6 @@ public class OMService {
 	 * @param departmentTitle
 	 * @param jobName
 	 * @param salary
-	 * @return
 	 */
 	public void updateById(int inputId, String email, String phone, String departmentTitle, String jobName, int salary) {
 		for(int i=0; i<list.size(); i++) {
@@ -90,20 +89,18 @@ public class OMService {
 				if(salary != 0) list.get(i).setSalary(salary);
 			}
 		}
-	}
+	} // end updateById
 	
 	/** 5. 사번이 일치하는 사원 정보 삭제
 	 * @param inputId
-	 * @return 
 	 */
 	public void deleteById(int inputId) {
 		for(int i=0; i<list.size(); i++) {
 			if(list.get(i).getEmpId()==inputId) {
 				list.remove(i);
 			}
-			
 		}
-	}
+	} // end deleteById
 	
 	/** 6. 입력 받은 부서와 일치 모든 사원 정보 조회
 	 * @param inputTitle : 입력한 부서명
@@ -117,8 +114,7 @@ public class OMService {
 			}
 		}
 		return resultList;
-	}
-	
+	} // end selectByTitle
 	
 	/** 7. 입력 받은 급여 이상을 받는 모든 사원 정보 조회
 	 * @param inputSalary ; 입력한 급여
@@ -132,7 +128,7 @@ public class OMService {
 			}
 		}
 		return resultList;
-	}
+	} // end selectBySalary
 	
 	/** 8. 부서별 급여 합 전체 조회
 	 * @return 부서별 급여 합계가 저장된 리스트
@@ -154,6 +150,5 @@ public class OMService {
 			}
 		}
 		return map;
-	}
-	
-}
+	} // end titleSalary 
+} // end of class
